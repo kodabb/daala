@@ -1407,7 +1407,7 @@ static void od_encode_mvs(daala_enc_ctx *enc) {
   int level;
   od_mv_grid_pt *mvp;
   od_mv_grid_pt **grid;
-  ogg_uint16_t *cdf;
+  od_uint16 *cdf;
   nhmvbs = enc->state.nhmvbs;
   nvmvbs = enc->state.nvmvbs;
   mvimg = enc->state.io_imgs + OD_FRAME_REC;

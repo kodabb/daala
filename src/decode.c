@@ -708,7 +708,7 @@ static void od_dec_mv_unpack(daala_dec_ctx *dec) {
   int level;
   od_mv_grid_pt *mvp;
   od_mv_grid_pt **grid;
-  ogg_uint16_t *cdf;
+  od_uint16 *cdf;
   OD_ASSERT(dec->state.ref_imgi[OD_FRAME_PREV] >= 0);
   od_state_mvs_clear(&dec->state);
   nhmvbs = dec->state.nhmvbs;

@@ -49,7 +49,7 @@ void laplace_encode_special(od_ec_enc *enc, int x, unsigned decay, int max) {
   int xs;
   int ms;
   int sym;
-  const ogg_uint16_t *cdf;
+  const od_uint16 *cdf;
   shift = 0;
   if (max == 0) return;
   /* We don't want a large decay value because that would require too many
@@ -101,7 +101,7 @@ void laplace_encode(od_ec_enc *enc, int x, int ex_q8, int k) {
   int j;
   int shift;
   int xs;
-  ogg_uint16_t cdf[16];
+  od_uint16 cdf[16];
   int sym;
   int decay;
   int offset;

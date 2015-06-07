@@ -606,7 +606,7 @@ int od_pvq_encode(daala_enc_ctx *enc,
   generic_encoder *model;
   double skip_diff;
   unsigned tell;
-  ogg_uint16_t *skip_cdf;
+  od_uint16 *skip_cdf;
   od_rollback_buffer buf;
   int dc_quant;
   int flip;

@@ -40,7 +40,7 @@
 #include <stdint.h>
 
    typedef int16_t od_int16;
-   typedef uint16_t ogg_uint16_t;
+   typedef uint16_t od_uint16;
    typedef int32_t od_int32;
    typedef uint32_t od_uint32;
 #elif defined(_WIN32)
@@ -50,30 +50,30 @@
      typedef _G_int32_t od_int32;
      typedef _G_uint32_t od_uint32;
      typedef _G_int16 od_int16;
-     typedef _G_uint16 ogg_uint16_t;
+     typedef _G_uint16 od_uint16;
 #  elif defined(__MINGW32__)
      typedef short od_int16;
-     typedef unsigned short ogg_uint16_t;
+     typedef unsigned short od_uint16;
      typedef int od_int32;
      typedef unsigned int od_uint32;
 #  elif defined(__MWERKS__)
      typedef int od_int32;
      typedef unsigned int od_uint32;
      typedef short od_int16;
-     typedef unsigned short ogg_uint16_t;
+     typedef unsigned short od_uint16;
 #  else
      /* MSVC/Borland */
      typedef __int32 od_int32;
      typedef unsigned __int32 od_uint32;
      typedef __int16 od_int16;
-     typedef unsigned __int16 ogg_uint16_t;
+     typedef unsigned __int16 od_uint16;
 #  endif
 
 #elif defined(__MACOS__)
 
 #  include <sys/types.h>
    typedef SInt16 od_int16;
-   typedef UInt16 ogg_uint16_t;
+   typedef UInt16 od_uint16;
    typedef SInt32 od_int32;
    typedef UInt32 od_uint32;
 
@@ -81,7 +81,7 @@
 
 #  include <sys/types.h>
    typedef int16_t od_int16;
-   typedef u_int16_t ogg_uint16_t;
+   typedef u_int16_t od_uint16;
    typedef int32_t od_int32;
    typedef u_int32_t od_uint32;
 
@@ -90,7 +90,7 @@
    /* Be */
 #  include <inttypes.h>
    typedef int16 od_int16;
-   typedef u_int16 ogg_uint16_t;
+   typedef u_int16 od_uint16;
    typedef int32_t od_int32;
    typedef u_int32_t od_uint32;
 
@@ -98,7 +98,7 @@
 
    /* OS/2 GCC */
    typedef short od_int16;
-   typedef unsigned short ogg_uint16_t;
+   typedef unsigned short od_uint16;
    typedef int od_int32;
    typedef unsigned int od_uint32;
 
@@ -106,7 +106,7 @@
 
    /* DJGPP */
    typedef short od_int16;
-   typedef unsigned short ogg_uint16_t;
+   typedef unsigned short od_uint16;
    typedef int od_int32;
    typedef unsigned int od_uint32;
 
@@ -116,27 +116,27 @@
    typedef int od_int32;
    typedef unsigned od_uint32;
    typedef short od_int16;
-   typedef unsigned short ogg_uint16_t;
+   typedef unsigned short od_uint16;
 
 #elif defined(__SYMBIAN32__)
 
    /* Symbian GCC */
    typedef signed short od_int16;
-   typedef unsigned short ogg_uint16_t;
+   typedef unsigned short od_uint16;
    typedef signed int od_int32;
    typedef unsigned int od_uint32;
 
 #elif defined(CONFIG_TI_C54X) || defined (CONFIG_TI_C55X)
 
    typedef short od_int16;
-   typedef unsigned short ogg_uint16_t;
+   typedef unsigned short od_uint16;
    typedef long od_int32;
    typedef unsigned long od_uint32;
 
 #elif defined(CONFIG_TI_C6X)
 
    typedef short od_int16;
-   typedef unsigned short ogg_uint16_t;
+   typedef unsigned short od_uint16;
    typedef int od_int32;
    typedef unsigned int od_uint32;
 
@@ -144,7 +144,7 @@
 
    /* Give up, take a reasonable guess */
    typedef short od_int16;
-   typedef unsigned short ogg_uint16_t;
+   typedef unsigned short od_uint16;
    typedef int od_int32;
    typedef unsigned int od_uint32;
 

@@ -48,7 +48,7 @@ int laplace_decode_special(od_ec_dec *dec, unsigned decay, int max) {
   int xs;
   int ms;
   int sym;
-  const ogg_uint16_t *cdf;
+  const od_uint16 *cdf;
   shift = 0;
   if (max == 0) return 0;
   /* We don't want a large decay value because that would require too many
@@ -104,7 +104,7 @@ int laplace_decode_special(od_ec_dec *dec, unsigned decay, int max) {
 int laplace_decode(od_ec_dec *dec, int ex_q8, int k) {
   int j;
   int shift;
-  ogg_uint16_t cdf[16];
+  od_uint16 cdf[16];
   int sym;
   int lsb;
   int decay;

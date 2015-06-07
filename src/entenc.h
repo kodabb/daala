@@ -45,7 +45,7 @@ struct od_ec_enc {
   /*Number of valid bits in end_window.*/
   int nend_bits;
   /*A buffer for output bytes with their associated carry flags.*/
-  ogg_uint16_t *precarry_buf;
+  od_uint16 *precarry_buf;
   /*The size of the pre-carry buffer.*/
   od_uint32 precarry_storage;
   /*The offset at which the next entropy-coded byte will be written.*/
@@ -53,7 +53,7 @@ struct od_ec_enc {
   /*The low end of the current range.*/
   od_ec_window low;
   /*The number of values in the current range.*/
-  ogg_uint16_t rng;
+  od_uint16 rng;
   /*The number of bits of data in the current value.*/
   od_int16 cnt;
   /*Nonzero if an error occurred.*/
@@ -75,13 +75,13 @@ void od_ec_encode_bool(od_ec_enc *enc, int val, unsigned fz, unsigned _ft)
 void od_ec_encode_bool_q15(od_ec_enc *enc, int val, unsigned fz_q15)
  OD_ARG_NONNULL(1);
 void od_ec_encode_cdf(od_ec_enc *enc, int s,
- const ogg_uint16_t *cdf, int nsyms) OD_ARG_NONNULL(1) OD_ARG_NONNULL(3);
+ const od_uint16 *cdf, int nsyms) OD_ARG_NONNULL(1) OD_ARG_NONNULL(3);
 void od_ec_encode_cdf_q15(od_ec_enc *enc, int s,
- const ogg_uint16_t *cdf, int nsyms) OD_ARG_NONNULL(1) OD_ARG_NONNULL(3);
+ const od_uint16 *cdf, int nsyms) OD_ARG_NONNULL(1) OD_ARG_NONNULL(3);
 void od_ec_encode_cdf_unscaled(od_ec_enc *enc, int s,
- const ogg_uint16_t *cdf, int nsyms) OD_ARG_NONNULL(1) OD_ARG_NONNULL(3);
+ const od_uint16 *cdf, int nsyms) OD_ARG_NONNULL(1) OD_ARG_NONNULL(3);
 void od_ec_encode_cdf_unscaled_dyadic(od_ec_enc *enc, int s,
- const ogg_uint16_t *cdf, int nsyms, unsigned ftb)
+ const od_uint16 *cdf, int nsyms, unsigned ftb)
  OD_ARG_NONNULL(1) OD_ARG_NONNULL(3);
 
 void od_ec_enc_uint(od_ec_enc *enc, od_uint32 fl, od_uint32 ft)

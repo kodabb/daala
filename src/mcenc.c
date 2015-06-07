@@ -3217,7 +3217,7 @@ static void od_mv_est_calc_sads(od_mv_est_ctx *est, int ref) {
         for (vx = 0; vx < nhmvbs; vx++) {
           oc = (vx & 1) ^ ((vy & 1) << 1 | (vy & 1));
           for (s = 0; s < smax; s++) {
-            sad_cache_row[vx][s] = (ogg_uint16_t)od_mv_est_sad8(est, ref,
+            sad_cache_row[vx][s] = (od_uint16)od_mv_est_sad8(est, ref,
              vx << log_mvb_sz, vy << log_mvb_sz, oc, s, log_mvb_sz);
           }
           /*While we're here, fill in the block's setup state.*/

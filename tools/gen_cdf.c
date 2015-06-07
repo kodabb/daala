@@ -49,7 +49,7 @@ int main(int argc, char **argv)
   printf("/* This file is auto-generated using \"gen_cdf %d %d\" */\n\n",
    N, shift);
   printf("#include \"pvq_code.h\"\n\n");
-  printf("const ogg_uint16_t cdf_table[%d][16] = {\n", N+1);
+  printf("const od_uint16 cdf_table[%d][16] = {\n", N+1);
   printf("  {");
   for(j=0;j<16;j++){
     printf("%5d%s",32768U-15+j,j+1<16?",":"");

@@ -2518,7 +2518,7 @@ int od_mv_split_flag_ctx(od_mv_grid_pt **grid, int vx, int vy,int level) {
   return 3 * (split1 + split2) + same1 + same2;
 }
 
-ogg_uint16_t *od_mv_split_flag_cdf(od_state *state,
+od_uint16 *od_mv_split_flag_cdf(od_state *state,
  int vx, int vy, int level) {
   int ctx;
   ctx = od_mv_split_flag_ctx(state->mv_grid, vx, vy, level);

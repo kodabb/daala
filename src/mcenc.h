@@ -35,7 +35,7 @@ typedef struct od_mv_dp_node od_mv_dp_node;
 # include "mc.h"
 # include "encint.h"
 
-typedef ogg_uint16_t od_sad4[4];
+typedef od_uint16 od_sad4[4];
 
 /*The state information used by the motion estimation process that is not
    required by the decoder.

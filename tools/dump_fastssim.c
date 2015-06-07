@@ -37,8 +37,8 @@ typedef struct fs_ctx   fs_ctx;
 #define FS_MAXI(_a,_b) ((_a)>(_b)?(_a):(_b))
 
 struct fs_level{
-  ogg_uint16_t *im1;
-  ogg_uint16_t *im2;
+  od_uint16 *im1;
+  od_uint16 *im2;
   double       *ssim;
   int           w;
   int           h;
@@ -88,7 +88,7 @@ static void fs_ctx_init(fs_ctx *_ctx,int _w,int _h,int _nlevels){
     level_size+=sizeof(*_ctx->level[l].ssim)-1;
     level_size/=sizeof(*_ctx->level[l].ssim);
     level_size*=sizeof(*_ctx->level[l].ssim);
-    _ctx->level[l].im1=(ogg_uint16_t *)data;
+    _ctx->level[l].im1=(od_uint16 *)data;
     _ctx->level[l].im2=_ctx->level[l].im1+im_size;
     data+=level_size;
     _ctx->level[l].ssim=(double *)data;
@@ -104,10 +104,10 @@ static void fs_ctx_clear(fs_ctx *_ctx){
 }
 
 static void fs_downsample_level(fs_ctx *_ctx,int _l){
-  const ogg_uint16_t *src1;
-  const ogg_uint16_t *src2;
-  ogg_uint16_t       *dst1;
-  ogg_uint16_t       *dst2;
+  const od_uint16 *src1;
+  const od_uint16 *src2;
+  od_uint16       *dst1;
+  od_uint16       *dst2;
   int                 w2;
   int                 h2;
   int                 w;
@@ -142,8 +142,8 @@ static void fs_downsample_level(fs_ctx *_ctx,int _l){
 
 static void fs_downsample_level0(fs_ctx *_ctx,const unsigned char *_src1,
  int _s1ystride,const unsigned char *_src2,int _s2ystride,int _w,int _h){
-  ogg_uint16_t *dst1;
-  ogg_uint16_t *dst2;
+  od_uint16 *dst1;
+  od_uint16 *dst2;
   int           w;
   int           h;
   int           i;
@@ -173,8 +173,8 @@ static void fs_downsample_level0(fs_ctx *_ctx,const unsigned char *_src1,
 static void fs_apply_luminance(fs_ctx *_ctx,int _l){
   unsigned     *col_sums_x;
   unsigned     *col_sums_y;
-  ogg_uint16_t *im1;
-  ogg_uint16_t *im2;
+  od_uint16 *im1;
+  od_uint16 *im2;
   double       *ssim;
   double        c1;
   int           w;
@@ -291,8 +291,8 @@ static void fs_apply_luminance(fs_ctx *_ctx,int _l){
   while(0)
 
 static void fs_calc_structure(fs_ctx *_ctx,int _l){
-  ogg_uint16_t *im1;
-  ogg_uint16_t *im2;
+  od_uint16 *im1;
+  od_uint16 *im2;
   unsigned     *gx_buf;
   unsigned     *gy_buf;
   double       *ssim;

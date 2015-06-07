@@ -277,7 +277,7 @@ int main(int _argc,char **_argv){
           else od_ec_encode_bool(&enc,data[j],fz[j]<<15-ftbs[j],32768);
         }break;
         case 1:{
-          ogg_uint16_t cdf[2];
+          od_uint16 cdf[2];
           cdf[0]=fz[j];
           cdf[1]=1U<<ftbs[j];
           od_ec_encode_cdf_unscaled_dyadic(&enc,data[j],cdf,2,ftbs[j]);
@@ -308,7 +308,7 @@ int main(int _argc,char **_argv){
           else sym=od_ec_decode_bool(&dec,fz[j]<<15-ftbs[j],32768);
         }break;
         case 1:{
-          ogg_uint16_t cdf[2];
+          od_uint16 cdf[2];
           cdf[0]=fz[j];
           cdf[1]=1U<<ftbs[j];
           sym=od_ec_decode_cdf_unscaled_dyadic(&dec,cdf,2,ftbs[j]);

@@ -113,21 +113,21 @@ struct od_adapt_ctx {
   int                 pvq_adapt[2*OD_NBSIZES*OD_NSB_ADAPT_CTXS];
   int                 pvq_k1_increment;
   /* CDFs are size 16 despite the fact that we're using less than that. */
-  ogg_uint16_t        pvq_k1_cdf[4][16];
+  od_uint16        pvq_k1_cdf[4][16];
   generic_encoder     pvq_param_model[3];
   int                 pvq_ext[OD_NBSIZES*PVQ_MAX_PARTITIONS];
   int                 pvq_exg[OD_NPLANES_MAX][OD_NBSIZES][PVQ_MAX_PARTITIONS];
   int                 pvq_gaintheta_increment;
-  ogg_uint16_t        pvq_gaintheta_cdf[2*OD_NBSIZES*PVQ_MAX_PARTITIONS][16];
+  od_uint16        pvq_gaintheta_cdf[2*OD_NBSIZES*PVQ_MAX_PARTITIONS][16];
   int                 pvq_skip_dir_increment;
-  ogg_uint16_t        pvq_skip_dir_cdf[2*(OD_NBSIZES-1)][7];
+  od_uint16        pvq_skip_dir_cdf[2*(OD_NBSIZES-1)][7];
   /* Motion vectors */
   generic_encoder     mv_model;
   int                 mv_ex[OD_MC_NLEVELS];
   int                 mv_ey[OD_MC_NLEVELS];
-  ogg_uint16_t        mv_small_cdf[5][16];
+  od_uint16        mv_small_cdf[5][16];
   int                 mv_small_increment;
-  ogg_uint16_t        split_flag_cdf[OD_MC_LEVEL_MAX][9][2];
+  od_uint16        split_flag_cdf[OD_MC_LEVEL_MAX][9][2];
   int                 split_flag_increment;
 
   generic_encoder model_dc[OD_NPLANES_MAX];
@@ -138,13 +138,13 @@ struct od_adapt_ctx {
   int ex_g[OD_NPLANES_MAX][OD_NBSIZES];
 
   /* Joint skip flag for DC and AC */
-  ogg_uint16_t skip_cdf[OD_NPLANES_MAX*OD_NBSIZES][5];
+  od_uint16 skip_cdf[OD_NPLANES_MAX*OD_NBSIZES][5];
   int skip_increment;
-  ogg_uint16_t haar_coeff_cdf[15*3*(OD_NBSIZES + 1)][16];
+  od_uint16 haar_coeff_cdf[15*3*(OD_NBSIZES + 1)][16];
   int haar_coeff_increment;
-  ogg_uint16_t haar_split_cdf[15*2*5][16];
+  od_uint16 haar_split_cdf[15*2*5][16];
   int haar_split_increment;
-  ogg_uint16_t haar_bits_cdf[3][16];
+  od_uint16 haar_bits_cdf[3][16];
   int haar_bits_increment;
 };
 

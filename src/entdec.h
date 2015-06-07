@@ -52,7 +52,7 @@ struct od_ec_dec {
      range.*/
   od_ec_window dif;
   /*The number of values in the current range.*/
-  ogg_uint16_t rng;
+  od_uint16 rng;
   /*The number of bits of data in the current value.*/
   od_int16 cnt;
   /*Nonzero if an error occurred.*/
@@ -70,13 +70,13 @@ OD_WARN_UNUSED_RESULT int od_ec_decode_bool(od_ec_dec *dec, unsigned fz,
 OD_WARN_UNUSED_RESULT int od_ec_decode_bool_q15(od_ec_dec *dec, unsigned fz)
  OD_ARG_NONNULL(1);
 OD_WARN_UNUSED_RESULT int od_ec_decode_cdf(od_ec_dec *dec,
- const ogg_uint16_t *cdf, int nsyms) OD_ARG_NONNULL(1) OD_ARG_NONNULL(2);
+ const od_uint16 *cdf, int nsyms) OD_ARG_NONNULL(1) OD_ARG_NONNULL(2);
 OD_WARN_UNUSED_RESULT int od_ec_decode_cdf_q15(od_ec_dec *dec,
- const ogg_uint16_t *cdf, int nsyms) OD_ARG_NONNULL(1) OD_ARG_NONNULL(2);
+ const od_uint16 *cdf, int nsyms) OD_ARG_NONNULL(1) OD_ARG_NONNULL(2);
 OD_WARN_UNUSED_RESULT int od_ec_decode_cdf_unscaled(od_ec_dec *dec,
- const ogg_uint16_t *cdf, int nsyms) OD_ARG_NONNULL(1) OD_ARG_NONNULL(2);
+ const od_uint16 *cdf, int nsyms) OD_ARG_NONNULL(1) OD_ARG_NONNULL(2);
 OD_WARN_UNUSED_RESULT int od_ec_decode_cdf_unscaled_dyadic(od_ec_dec *dec,
- const ogg_uint16_t *cdf, int nsyms, unsigned _ftb)
+ const od_uint16 *cdf, int nsyms, unsigned _ftb)
  OD_ARG_NONNULL(1) OD_ARG_NONNULL(2);
 
 OD_WARN_UNUSED_RESULT od_uint32 od_ec_dec_uint(od_ec_dec *dec,

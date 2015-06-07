@@ -215,7 +215,7 @@ int od_ec_decode_bool_q15(od_ec_dec *dec, unsigned fz) {
   nsyms: The number of symbols in the alphabet.
          This should be at most 16.
   Return: The decoded symbol s.*/
-int od_ec_decode_cdf(od_ec_dec *dec, const ogg_uint16_t *cdf, int nsyms) {
+int od_ec_decode_cdf(od_ec_dec *dec, const od_uint16 *cdf, int nsyms) {
   od_ec_window dif;
   unsigned r;
   unsigned d;
@@ -263,7 +263,7 @@ int od_ec_decode_cdf(od_ec_dec *dec, const ogg_uint16_t *cdf, int nsyms) {
   nsyms: The number of symbols in the alphabet.
          This should be at most 16.
   Return: The decoded symbol s.*/
-int od_ec_decode_cdf_q15(od_ec_dec *dec, const ogg_uint16_t *cdf, int nsyms) {
+int od_ec_decode_cdf_q15(od_ec_dec *dec, const od_uint16 *cdf, int nsyms) {
   od_ec_window dif;
   unsigned r;
   unsigned d;
@@ -305,7 +305,7 @@ int od_ec_decode_cdf_q15(od_ec_dec *dec, const ogg_uint16_t *cdf, int nsyms) {
          This should be at most 16.
   Return: The decoded symbol s.*/
 int od_ec_decode_cdf_unscaled(od_ec_dec *dec,
- const ogg_uint16_t *cdf, int nsyms) {
+ const od_uint16 *cdf, int nsyms) {
   od_ec_window dif;
   unsigned r;
   unsigned d;
@@ -360,7 +360,7 @@ int od_ec_decode_cdf_unscaled(od_ec_dec *dec,
        This must be no more than 15.
   Return: The decoded symbol s.*/
 int od_ec_decode_cdf_unscaled_dyadic(od_ec_dec *dec,
- const ogg_uint16_t *cdf, int nsyms, unsigned ftb) {
+ const od_uint16 *cdf, int nsyms, unsigned ftb) {
   od_ec_window dif;
   unsigned r;
   unsigned d;

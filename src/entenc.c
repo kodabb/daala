@@ -75,7 +75,7 @@ static void od_ec_enc_normalize(od_ec_enc *enc,
     For a 32-bit window this is about the same amount of work, but for a 64-bit
      window it should be a fair win.*/
   if (s >= 0) {
-    ogg_uint16_t *buf;
+    od_uint16 *buf;
     od_uint32 storage;
     od_uint32 offs;
     unsigned m;
@@ -84,7 +84,7 @@ static void od_ec_enc_normalize(od_ec_enc *enc,
     offs = enc->offs;
     if (offs + 2 > storage) {
       storage = 2*storage + 2;
-      buf = (ogg_uint16_t *)_ogg_realloc(buf, sizeof(*buf)*storage);
+      buf = (od_uint16 *)_ogg_realloc(buf, sizeof(*buf)*storage);
       if (buf == NULL) {
         enc->error = -1;
         enc->offs = 0;
@@ -97,13 +97,13 @@ static void od_ec_enc_normalize(od_ec_enc *enc,
     m = (1 << c) - 1;
     if (s >= 8) {
       OD_ASSERT(offs < storage);
-      buf[offs++] = (ogg_uint16_t)(low >> c);
+      buf[offs++] = (od_uint16)(low >> c);
       low &= m;
       c -= 8;
       m >>= 8;
     }
     OD_ASSERT(offs < storage);
-    buf[offs++] = (ogg_uint16_t)(low >> c);
+    buf[offs++] = (od_uint16)(low >> c);
     s = c + d - 24;
     low &= m;
     enc->offs = offs;
@@ -124,7 +124,7 @@ void od_ec_enc_init(od_ec_enc *enc, od_uint32 size) {
     enc->error = -1;
   }
   enc->precarry_buf =
-   (ogg_uint16_t *)_ogg_malloc(sizeof(*enc->precarry_buf)*size);
+   (od_uint16 *)_ogg_malloc(sizeof(*enc->precarry_buf)*size);
   enc->precarry_storage = size;
   if (size > 0 && enc->precarry_buf == NULL) {
     enc->precarry_storage = 0;
@@ -313,7 +313,7 @@ void od_ec_encode_bool_q15(od_ec_enc *enc, int val, unsigned fz) {
   nsyms: The number of symbols in the alphabet.
          This should be at most 16.*/
 void od_ec_encode_cdf(od_ec_enc *enc, int s,
- const ogg_uint16_t *cdf, int nsyms) {
+ const od_uint16 *cdf, int nsyms) {
   OD_ASSERT(s >= 0);
   OD_ASSERT(s < nsyms);
   od_ec_encode(enc, s > 0 ? cdf[s - 1] : 0, cdf[s], cdf[nsyms - 1]);
@@ -328,7 +328,7 @@ void od_ec_encode_cdf(od_ec_enc *enc, int s,
   nsyms: The number of symbols in the alphabet.
          This should be at most 16.*/
 void od_ec_encode_cdf_q15(od_ec_enc *enc, int s,
- const ogg_uint16_t *cdf, int nsyms) {
+ const od_uint16 *cdf, int nsyms) {
   (void)nsyms;
   OD_ASSERT(s >= 0);
   OD_ASSERT(s < nsyms);
@@ -345,7 +345,7 @@ void od_ec_encode_cdf_q15(od_ec_enc *enc, int s,
   nsyms: The number of symbols in the alphabet.
          This should be at most 16.*/
 void od_ec_encode_cdf_unscaled(od_ec_enc *enc, int s,
- const ogg_uint16_t *cdf, int nsyms) {
+ const od_uint16 *cdf, int nsyms) {
   OD_ASSERT(s >= 0);
   OD_ASSERT(s < nsyms);
   od_ec_encode_unscaled(enc, s > 0 ? cdf[s - 1] : 0, cdf[s], cdf[nsyms - 1]);
@@ -362,7 +362,7 @@ void od_ec_encode_cdf_unscaled(od_ec_enc *enc, int s,
   ftb: The number of bits of precision in the cumulative distribution.
        This must be no more than 15.*/
 void od_ec_encode_cdf_unscaled_dyadic(od_ec_enc *enc, int s,
- const ogg_uint16_t *cdf, int nsyms, unsigned ftb) {
+ const od_uint16 *cdf, int nsyms, unsigned ftb) {
   (void)nsyms;
   OD_ASSERT(s >= 0);
   OD_ASSERT(s < nsyms);
@@ -471,7 +471,7 @@ void od_ec_enc_patch_initial_bits(od_ec_enc *enc, unsigned val, int nbits) {
   if (enc->offs > 0) {
     /*The first byte has been finalized.*/
     enc->precarry_buf[0] =
-     (ogg_uint16_t)((enc->precarry_buf[0] & ~mask) | val << shift);
+     (od_uint16)((enc->precarry_buf[0] & ~mask) | val << shift);
   }
   else if (9 + enc->cnt + (enc->rng == 0x8000) > nbits) {
     /*The first byte has yet to be output.*/
@@ -491,7 +491,7 @@ void od_ec_enc_patch_initial_bits(od_ec_enc *enc, unsigned val, int nbits) {
 unsigned char *od_ec_enc_done(od_ec_enc *enc, od_uint32 *nbytes) {
   unsigned char *out;
   od_uint32 storage;
-  ogg_uint16_t *buf;
+  od_uint16 *buf;
   od_uint32 offs;
   od_uint32 end_offs;
   int nend_bits;
@@ -533,7 +533,7 @@ unsigned char *od_ec_enc_done(od_ec_enc *enc, od_uint32 *nbytes) {
     storage = enc->precarry_storage;
     if (offs + ((s + 7) >> 3) > storage) {
       storage = storage*2 + ((s + 7) >> 3);
-      buf = (ogg_uint16_t *)_ogg_realloc(buf, sizeof(*buf)*storage);
+      buf = (od_uint16 *)_ogg_realloc(buf, sizeof(*buf)*storage);
       if (buf == NULL) {
         enc->error = -1;
         return NULL;
@@ -544,7 +544,7 @@ unsigned char *od_ec_enc_done(od_ec_enc *enc, od_uint32 *nbytes) {
     n = (1 << (c + 16)) - 1;
     do {
       OD_ASSERT(offs < storage);
-      buf[offs++] = (ogg_uint16_t)(e >> (c + 16));
+      buf[offs++] = (od_uint16)(e >> (c + 16));
       e &= n;
       s -= 8;
       c -= 8;
@@ -648,7 +648,7 @@ void od_ec_enc_checkpoint(od_ec_enc *dst, const od_ec_enc *src) {
 void od_ec_enc_rollback(od_ec_enc *dst, const od_ec_enc *src) {
   unsigned char *buf;
   od_uint32 storage;
-  ogg_uint16_t *precarry_buf;
+  od_uint16 *precarry_buf;
   od_uint32 precarry_storage;
   OD_ASSERT(dst->storage >= src->storage);
   OD_ASSERT(dst->precarry_storage >= src->precarry_storage);
