@@ -102,7 +102,7 @@ static int od_enc_init(od_enc_ctx *enc, const daala_info *info) {
   }
   enc->params.mv_level_min = 0;
   enc->params.mv_level_max = 4;
-  enc->bs = (od_block_size_comp *)_ogg_malloc(sizeof(*enc->bs));
+  enc->bs = (od_block_size_comp *)malloc(sizeof(*enc->bs));
 #if defined(OD_ENCODER_CHECK)
   enc->dec = daala_decode_alloc(info, NULL);
 #endif
@@ -119,9 +119,9 @@ static void od_enc_clear(od_enc_ctx *enc) {
 daala_enc_ctx *daala_encode_create(const daala_info *info) {
   od_enc_ctx *enc;
   if (info == NULL) return NULL;
-  enc = (od_enc_ctx *)_ogg_malloc(sizeof(*enc));
+  enc = (od_enc_ctx *)malloc(sizeof(*enc));
   if (od_enc_init(enc, info) < 0) {
-    _ogg_free(enc);
+    free(enc);
     return NULL;
   }
   return enc;
@@ -134,9 +134,9 @@ void daala_encode_free(daala_enc_ctx *enc) {
       daala_decode_free(enc->dec);
     }
 #endif
-    _ogg_free(enc->bs);
+    free(enc->bs);
     od_enc_clear(enc);
-    _ogg_free(enc);
+    free(enc);
   }
 }
 

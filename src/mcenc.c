@@ -1465,18 +1465,18 @@ static int od_mv_est_init_impl(od_mv_est_ctx *est, od_enc_ctx *enc) {
   if (OD_UNLIKELY(!est->refine_grid)) {
     return OD_EFAULT;
   }
-  est->dp_nodes = (od_mv_dp_node *)_ogg_malloc(
+  est->dp_nodes = (od_mv_dp_node *)malloc(
    sizeof(od_mv_dp_node)*(OD_MAXI(nhmvbs, nvmvbs) + 1));
   if (OD_UNLIKELY(!est->dp_nodes)) {
     return OD_EFAULT;
   }
   est->row_counts =
-   (unsigned *)_ogg_malloc(sizeof(*est->row_counts)*(nvmvbs + 1));
+   (unsigned *)malloc(sizeof(*est->row_counts)*(nvmvbs + 1));
   if (OD_UNLIKELY(!est->row_counts)) {
     return OD_EFAULT;
   }
   est->col_counts =
-   (unsigned *)_ogg_malloc(sizeof(*est->col_counts)*(nhmvbs + 1));
+   (unsigned *)malloc(sizeof(*est->col_counts)*(nhmvbs + 1));
   if (OD_UNLIKELY(!est->col_counts)) {
     return OD_EFAULT;
   }
@@ -1488,7 +1488,7 @@ static int od_mv_est_init_impl(od_mv_est_ctx *est, od_enc_ctx *enc) {
       enc->state.mv_grid[vy][vx].valid = 1;
     }
   }
-  est->dec_heap = (od_mv_node **)_ogg_malloc(
+  est->dec_heap = (od_mv_node **)malloc(
    sizeof(*est->dec_heap)*(nvmvbs + 1)*(nhmvbs + 1));
   if (OD_UNLIKELY(!est->dec_heap)) {
     return OD_EFAULT;
@@ -1502,10 +1502,10 @@ static int od_mv_est_init_impl(od_mv_est_ctx *est, od_enc_ctx *enc) {
 
 static void od_mv_est_clear(od_mv_est_ctx *est) {
   int log_mvb_sz;
-  _ogg_free(est->dec_heap);
-  _ogg_free(est->col_counts);
-  _ogg_free(est->row_counts);
-  _ogg_free(est->dp_nodes);
+  free(est->dec_heap);
+  free(est->col_counts);
+  free(est->row_counts);
+  free(est->dp_nodes);
   od_free_2d(est->refine_grid);
   od_free_2d(est->mvs);
   for (log_mvb_sz = OD_LOG_MVB_DELTA0; log_mvb_sz-- > 0; ) {
@@ -5604,9 +5604,9 @@ int od_mv_est_update_mv_rates(od_mv_est_ctx *est, int mv_res) {
 
 od_mv_est_ctx *od_mv_est_alloc(od_enc_ctx *enc) {
   od_mv_est_ctx *ret;
-  ret = (od_mv_est_ctx *)_ogg_malloc(sizeof(*ret));
+  ret = (od_mv_est_ctx *)malloc(sizeof(*ret));
   if (od_mv_est_init(ret, enc) < 0) {
-    _ogg_free(ret);
+    free(ret);
     return NULL;
   }
   return ret;
@@ -5615,7 +5615,7 @@ od_mv_est_ctx *od_mv_est_alloc(od_enc_ctx *enc) {
 void od_mv_est_free(od_mv_est_ctx *est) {
   if (est != NULL) {
     od_mv_est_clear(est);
-    _ogg_free(est);
+    free(est);
   }
 }
 

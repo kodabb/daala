@@ -70,7 +70,7 @@ static void *od_aligned_malloc(size_t _sz,size_t _align) {
   unsigned char *p;
   if (_align - 1 > UCHAR_MAX || (_align&_align-1) || _sz > ~(size_t)0-_align)
     return NULL;
-  p = (unsigned char *)_ogg_malloc(_sz + _align);
+  p = (unsigned char *)malloc(_sz + _align);
   if (p != NULL) {
     int offs;
     offs = ((p-(unsigned char *)0) - 1 & _align - 1);
@@ -86,7 +86,7 @@ static void od_aligned_free(void *_ptr) {
   if (p != NULL) {
     int offs;
     offs = *--p;
-    _ogg_free(p - offs);
+    free(p - offs);
   }
 }
 
@@ -286,7 +286,7 @@ static int od_state_init_impl(od_state *state, const daala_info *info) {
     int ydec;
     int w;
     int h;
-    state->sb_dc_mem[pli] = (od_coeff*)_ogg_malloc(
+    state->sb_dc_mem[pli] = (od_coeff*)malloc(
      sizeof(state->sb_dc_mem[pli][0])*state->nhsb*state->nvsb);
     if (OD_UNLIKELY(!state->sb_dc_mem[pli])) {
       return OD_EFAULT;
@@ -295,19 +295,19 @@ static int od_state_init_impl(od_state *state, const daala_info *info) {
     ydec = info->plane_info[pli].ydec;
     w = state->frame_width >> xdec;
     h = state->frame_height >> ydec;
-    state->ctmp[pli] = (od_coeff *)_ogg_malloc(w*h*sizeof(*state->ctmp[pli]));
+    state->ctmp[pli] = (od_coeff *)malloc(w*h*sizeof(*state->ctmp[pli]));
     if (OD_UNLIKELY(!state->ctmp[pli])) {
       return OD_EFAULT;
     }
-    state->dtmp[pli] = (od_coeff *)_ogg_malloc(w*h*sizeof(*state->dtmp[pli]));
+    state->dtmp[pli] = (od_coeff *)malloc(w*h*sizeof(*state->dtmp[pli]));
     if (OD_UNLIKELY(!state->dtmp[pli])) {
       return OD_EFAULT;
     }
-    state->mctmp[pli] = (od_coeff *)_ogg_malloc(w*h*sizeof(*state->mctmp[pli]));
+    state->mctmp[pli] = (od_coeff *)malloc(w*h*sizeof(*state->mctmp[pli]));
     if (OD_UNLIKELY(!state->mctmp[pli])) {
       return OD_EFAULT;
     }
-    state->mdtmp[pli] = (od_coeff *)_ogg_malloc(w*h*sizeof(*state->mdtmp[pli]));
+    state->mdtmp[pli] = (od_coeff *)malloc(w*h*sizeof(*state->mdtmp[pli]));
     if (OD_UNLIKELY(!state->mdtmp[pli])) {
       return OD_EFAULT;
     }
@@ -324,7 +324,7 @@ static int od_state_init_impl(od_state *state, const daala_info *info) {
         }
       }
       if (plj >= pli) {
-        state->lbuf[pli] = state->ltmp[pli] = (od_coeff *)_ogg_malloc(w*h*
+        state->lbuf[pli] = state->ltmp[pli] = (od_coeff *)malloc(w*h*
           sizeof(*state->ltmp[pli]));
         if (OD_UNLIKELY(!state->lbuf[pli])) {
           return OD_EFAULT;
@@ -333,7 +333,7 @@ static int od_state_init_impl(od_state *state, const daala_info *info) {
     }
     else state->lbuf[pli] = state->ltmp[pli] = NULL;
   }
-  state->bsize = (unsigned char *)_ogg_malloc(
+  state->bsize = (unsigned char *)malloc(
    sizeof(*state->bsize)*(state->nhsb + 2)*4*(state->nvsb + 2)*4);
   if (OD_UNLIKELY(!state->bsize)) {
     return OD_EFAULT;
@@ -362,7 +362,7 @@ void od_state_clear(od_state *state) {
   int i;
   if (state->dump_tags > 0) {
     for (i = 0; i < state->dump_tags; i++) fclose(state->dump_files[i].fd);
-    _ogg_free(state->dump_files);
+    free(state->dump_files);
     state->dump_files = 0;
     state->dump_tags = 0;
   }
@@ -371,14 +371,14 @@ void od_state_clear(od_state *state) {
   od_aligned_free(state->ref_img_data);
   state->bsize -= 4*state->bstride + 4;
   for (pli = 0; pli < state->info.nplanes; pli++) {
-    _ogg_free(state->sb_dc_mem[pli]);
-    _ogg_free(state->ltmp[pli]);
-    _ogg_free(state->dtmp[pli]);
-    _ogg_free(state->ctmp[pli]);
-    _ogg_free(state->mctmp[pli]);
-    _ogg_free(state->mdtmp[pli]);
+    free(state->sb_dc_mem[pli]);
+    free(state->ltmp[pli]);
+    free(state->dtmp[pli]);
+    free(state->ctmp[pli]);
+    free(state->mctmp[pli]);
+    free(state->mdtmp[pli]);
   }
-  _ogg_free(state->bsize);
+  free(state->bsize);
 }
 
 /*Probabilities that a motion vector is not coded given two neighbors and the
@@ -893,7 +893,7 @@ int od_state_dump_yuv(od_state *state, od_img *img, const char *tag) {
     const char *suf;
     OD_ASSERT(strlen(tag)<16);
     state->dump_tags++;
-    state->dump_files = _ogg_realloc(state->dump_files,
+    state->dump_files = realloc(state->dump_files,
      state->dump_tags*sizeof(od_yuv_dumpfile));
     OD_ASSERT(state->dump_files);
     strncpy(state->dump_files[i].tag,tag,16);

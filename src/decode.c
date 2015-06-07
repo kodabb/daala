@@ -67,9 +67,9 @@ daala_dec_ctx *daala_decode_alloc(const daala_info *info,
  const daala_setup_info *setup) {
   od_dec_ctx *dec;
   if (info == NULL) return NULL;
-  dec = (od_dec_ctx *)_ogg_malloc(sizeof(*dec));
+  dec = (od_dec_ctx *)malloc(sizeof(*dec));
   if (od_dec_init(dec, info, setup) < 0) {
-    _ogg_free(dec);
+    free(dec);
     return NULL;
   }
   return dec;
@@ -78,7 +78,7 @@ daala_dec_ctx *daala_decode_alloc(const daala_info *info,
 void daala_decode_free(daala_dec_ctx *dec) {
   if (dec != NULL) {
     od_dec_clear(dec);
-    _ogg_free(dec);
+    free(dec);
   }
 }
 

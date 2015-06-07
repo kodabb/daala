@@ -43,7 +43,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 void od_adapt2d_init(od_adapt2d_ctx *ctx, int nhv,
  int nctx, const od_int32 *params) {
   OD_ASSERT(nctx <= OD_NADAPT_CTXS_MAX);
-  ctx->data = (od_adapt2d_data *)_ogg_malloc(sizeof(*ctx->data)*nhv*nctx);
+  ctx->data = (od_adapt2d_data *)malloc(sizeof(*ctx->data)*nhv*nctx);
   ctx->nhv = nhv;
   ctx->nctx = nctx;
   ctx->params = params;
@@ -51,7 +51,7 @@ void od_adapt2d_init(od_adapt2d_ctx *ctx, int nhv,
 
 /*Frees a 2D moving average filter.*/
 void od_adapt2d_clear(od_adapt2d_ctx *ctx) {
-  _ogg_free(ctx->data);
+  free(ctx->data);
   ctx->data = NULL;
 }
 

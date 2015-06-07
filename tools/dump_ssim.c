@@ -51,7 +51,7 @@ static int gaussian_filter_init(unsigned **_kernel,double _sigma,int _max_len){
   else len=floor(_sigma*sqrt(-2*log(s)));
   kernel_len=len>=_max_len?_max_len-1:(int)len;
   kernel_sz=kernel_len<<1|1;
-  kernel=(unsigned *)_ogg_malloc(kernel_sz*sizeof(*kernel));
+  kernel=(unsigned *)malloc(kernel_sz*sizeof(*kernel));
   sum=0;
   for(ci=kernel_len;ci>0;ci--){
     kernel[kernel_len-ci]=kernel[kernel_len+ci]=
@@ -98,8 +98,8 @@ static double calc_ssim(const unsigned char *_src,int _systride,
   vkernel_offs=vkernel_sz>>1;
   for(line_sz=1,log_line_sz=0;line_sz<vkernel_sz;line_sz<<=1,log_line_sz++);
   line_mask=line_sz-1;
-  lines=(ssim_moments **)_ogg_malloc(line_sz*sizeof(*lines));
-  lines[0]=line_buf=(ssim_moments *)_ogg_malloc(line_sz*_w*sizeof(*line_buf));
+  lines=(ssim_moments **)malloc(line_sz*sizeof(*lines));
+  lines[0]=line_buf=(ssim_moments *)malloc(line_sz*_w*sizeof(*line_buf));
   for(y=1;y<line_sz;y++)lines[y]=lines[y-1]+_w;
   hkernel_sz=gaussian_filter_init(&hkernel,_h*(1.5/256)/_par,_w<_h?_w:_h);
   hkernel_offs=hkernel_sz>>1;
@@ -172,8 +172,8 @@ static double calc_ssim(const unsigned char *_src,int _systride,
       }
     }
   }
-  _ogg_free(line_buf);
-  _ogg_free(lines);
+  free(line_buf);
+  free(lines);
   return ssim/ssimw;
 }
 

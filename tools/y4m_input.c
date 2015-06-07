@@ -698,14 +698,14 @@ static int y4m_input_open_impl(y4m_input *_y4m,FILE *_fin){
 }
 
 static y4m_input *y4m_input_open(FILE *_fin){
-  y4m_input *y4m = (y4m_input *)_ogg_malloc(sizeof(*y4m));
+  y4m_input *y4m = (y4m_input *)malloc(sizeof(*y4m));
   if(y4m==NULL){
     fprintf(stderr,"Could not allocate y4m reader state.\n");
     return NULL;
   }
   if(y4m_input_open_impl(y4m,_fin)<0){
     fprintf(stderr,"Error opening y4m file.\n");
-    _ogg_free(y4m);
+    free(y4m);
     return NULL;
   }
   return y4m;

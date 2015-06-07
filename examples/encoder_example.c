@@ -251,7 +251,7 @@ static void id_y4m_file(av_input *avin, const char *file, FILE *test) {
     iplane->xstride = 1;
     iplane->ystride = (avin->video_pic_w
      + (1 << iplane->xdec) - 1)  >>  iplane->xdec;
-    iplane->data = (unsigned char *)_ogg_malloc(iplane->ystride*
+    iplane->data = (unsigned char *)malloc(iplane->ystride*
      ((avin->video_pic_h + (1 << iplane->ydec) - 1)  >>  iplane->ydec));
   }
 }
@@ -749,7 +749,7 @@ int main(int argc, char **argv) {
   daala_encode_free(dd);
   daala_comment_clear(&dc);
   for (pli = 0; pli < avin.video_img.nplanes; pli++) {
-    _ogg_free(avin.video_img.planes[pli].data);
+    free(avin.video_img.planes[pli].data);
   }
   if (outfile != NULL && outfile != stdout) fclose(outfile);
   fprintf(stderr, "\r    \ndone.\n\r");

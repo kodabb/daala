@@ -84,7 +84,7 @@ static void od_ec_enc_normalize(od_ec_enc *enc,
     offs = enc->offs;
     if (offs + 2 > storage) {
       storage = 2*storage + 2;
-      buf = (od_uint16 *)_ogg_realloc(buf, sizeof(*buf)*storage);
+      buf = (od_uint16 *)realloc(buf, sizeof(*buf)*storage);
       if (buf == NULL) {
         enc->error = -1;
         enc->offs = 0;
@@ -117,14 +117,14 @@ static void od_ec_enc_normalize(od_ec_enc *enc,
   size: The initial size of the buffer, in bytes.*/
 void od_ec_enc_init(od_ec_enc *enc, od_uint32 size) {
   od_ec_enc_reset(enc);
-  enc->buf = (unsigned char *)_ogg_malloc(sizeof(*enc->buf)*size);
+  enc->buf = (unsigned char *)malloc(sizeof(*enc->buf)*size);
   enc->storage = size;
   if (size > 0 && enc->buf == NULL) {
     enc->storage = 0;
     enc->error = -1;
   }
   enc->precarry_buf =
-   (od_uint16 *)_ogg_malloc(sizeof(*enc->precarry_buf)*size);
+   (od_uint16 *)malloc(sizeof(*enc->precarry_buf)*size);
   enc->precarry_storage = size;
   if (size > 0 && enc->precarry_buf == NULL) {
     enc->precarry_storage = 0;
@@ -152,8 +152,8 @@ void od_ec_enc_reset(od_ec_enc *enc) {
 
 /*Frees the buffers used by the encoder.*/
 void od_ec_enc_clear(od_ec_enc *enc) {
-  _ogg_free(enc->precarry_buf);
-  _ogg_free(enc->buf);
+  free(enc->precarry_buf);
+  free(enc->buf);
 }
 
 /*Encodes a symbol given its scaled frequency information.
@@ -417,7 +417,7 @@ void od_ec_enc_bits(od_ec_enc *enc, od_uint32 fl, unsigned ftb) {
       unsigned char *new_buf;
       od_uint32 new_storage;
       new_storage = 2*storage + (OD_EC_WINDOW_SIZE >> 3);
-      new_buf = (unsigned char *)_ogg_malloc(sizeof(*new_buf)*new_storage);
+      new_buf = (unsigned char *)malloc(sizeof(*new_buf)*new_storage);
       if (new_buf == NULL) {
         enc->error = -1;
         enc->end_offs = 0;
@@ -426,7 +426,7 @@ void od_ec_enc_bits(od_ec_enc *enc, od_uint32 fl, unsigned ftb) {
       OD_COPY(new_buf + new_storage - end_offs,
        buf + storage - end_offs, end_offs);
       storage = new_storage;
-      _ogg_free(buf);
+      free(buf);
       enc->buf = buf = new_buf;
       enc->storage = storage;
     }
@@ -533,7 +533,7 @@ unsigned char *od_ec_enc_done(od_ec_enc *enc, od_uint32 *nbytes) {
     storage = enc->precarry_storage;
     if (offs + ((s + 7) >> 3) > storage) {
       storage = storage*2 + ((s + 7) >> 3);
-      buf = (od_uint16 *)_ogg_realloc(buf, sizeof(*buf)*storage);
+      buf = (od_uint16 *)realloc(buf, sizeof(*buf)*storage);
       if (buf == NULL) {
         enc->error = -1;
         return NULL;
@@ -563,7 +563,7 @@ unsigned char *od_ec_enc_done(od_ec_enc *enc, od_uint32 *nbytes) {
   c = OD_MAXI((nend_bits - s + 7) >> 3, 0);
   if (offs + end_offs + c > storage) {
     storage = offs + end_offs + c;
-    out = (unsigned char *)_ogg_realloc(out, sizeof(*out)*storage);
+    out = (unsigned char *)realloc(out, sizeof(*out)*storage);
     if (out == NULL) {
       enc->error = -1;
       return NULL;

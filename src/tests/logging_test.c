@@ -38,10 +38,10 @@ static void setenv(const char *name, const char *value, int overwrite) {
   char *str;
   if (!overwrite && getenv(name) != NULL) return;
   len = strlen(name)+1+strlen(value)+1;
-  str = _ogg_malloc(len);
+  str = malloc(len);
   sprintf(str, "%s=%s", name, value);
   putenv(str);
-  _ogg_free(str);
+  free(str);
 }
 #endif
 

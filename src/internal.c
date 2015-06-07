@@ -154,7 +154,7 @@ void **od_malloc_2d(size_t _height, size_t _width, size_t _sz) {
   rowsz = _sz*_width;
   datsz = rowsz*_height;
   /*Alloc array and row pointers.*/
-  ret = (char *)_ogg_malloc(datsz+colsz);
+  ret = (char *)malloc(datsz+colsz);
   /*Initialize the array.*/
   if (ret != NULL) {
     size_t   i;
@@ -177,7 +177,7 @@ void **od_calloc_2d(size_t _height, size_t _width, size_t _sz) {
   rowsz = _sz*_width;
   datsz = rowsz*_height;
   /*Alloc array and row pointers.*/
-  ret = (char *)_ogg_calloc(datsz + colsz, 1);
+  ret = (char *)calloc(datsz + colsz, 1);
   /*Initialize the array.*/
   if (ret != NULL) {
     size_t   i;
@@ -192,14 +192,14 @@ void **od_calloc_2d(size_t _height, size_t _width, size_t _sz) {
 }
 
 void od_free_2d(void *_ptr) {
-  _ogg_free(_ptr);
+  free(_ptr);
 }
 
 #define BUFFER_INCREMENT (256)
 
 void oggbyte_writeinit(oggbyte_buffer *_b) {
   OD_CLEAR(_b, 1);
-  _b->ptr = _b->buf = (unsigned char *)_ogg_malloc(BUFFER_INCREMENT);
+  _b->ptr = _b->buf = (unsigned char *)malloc(BUFFER_INCREMENT);
   _b->storage = BUFFER_INCREMENT;
 }
 
@@ -212,7 +212,7 @@ void oggbyte_write1(oggbyte_buffer *_b, unsigned _value) {
   ptrdiff_t endbyte;
   endbyte = _b->ptr-_b->buf;
   if (endbyte >= _b->storage) {
-    _b->buf = (unsigned char *)_ogg_realloc(_b->buf,
+    _b->buf = (unsigned char *)realloc(_b->buf,
             _b->storage + BUFFER_INCREMENT);
     _b->storage += BUFFER_INCREMENT;
     _b->ptr = _b->buf+endbyte;
@@ -224,7 +224,7 @@ void oggbyte_write4(oggbyte_buffer *_b, od_uint32 _value) {
   ptrdiff_t endbyte;
   endbyte = _b->ptr - _b->buf;
   if (endbyte+4 > _b->storage) {
-    _b->buf = (unsigned char *)_ogg_realloc(_b->buf,
+    _b->buf = (unsigned char *)realloc(_b->buf,
             _b->storage + BUFFER_INCREMENT);
     _b->storage += BUFFER_INCREMENT;
     _b->ptr = _b->buf + endbyte;
@@ -244,7 +244,7 @@ void oggbyte_writecopy(oggbyte_buffer *_b, const void *_source,
   endbyte = _b->ptr-_b->buf;
   if (endbyte+_bytes > _b->storage) {
     _b->storage = endbyte+_bytes+BUFFER_INCREMENT;
-    _b->buf = (unsigned char *)_ogg_realloc((void *)_b->buf, _b->storage);
+    _b->buf = (unsigned char *)realloc((void *)_b->buf, _b->storage);
     _b->ptr = _b->buf+endbyte;
   }
   memmove(_b->ptr, _source, _bytes);
@@ -256,7 +256,7 @@ void oggbyte_reset(oggbyte_buffer *_b) {
 }
 
 void oggbyte_writeclear(oggbyte_buffer *_b) {
-  _ogg_free(_b->buf);
+  free(_b->buf);
   OD_CLEAR(_b, 1);
 }
 
