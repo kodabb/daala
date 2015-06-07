@@ -108,7 +108,7 @@ static const unsigned short __attribute__((aligned(16),used)) OD_BILV[128]={
 
 #if defined(OD_CHECKASM)
 void od_mc_predict1fmv8_check(unsigned char *_dst,const unsigned char *_src,
- int _systride,ogg_int32_t _mvx,ogg_int32_t _mvy,
+ int _systride,od_int32 _mvx,od_int32 _mvy,
  int _log_xblk_sz,int _log_yblk_sz){
   unsigned char dst[OD_MVBSIZE_MAX*OD_MVBSIZE_MAX];
   int           xblk_sz;
@@ -586,7 +586,7 @@ static void od_mc_predict1fmv8_##_n##x##_m(unsigned char *_dst, \
 static void od_mc_predict1fmv8_##_n##x##_m(unsigned char *_dst, \
  const unsigned char *_src,int _systride,unsigned _mvxf,unsigned _mvyf){ \
   od_mc_predict1fmv8_c(_dst,_src,_systride, \
-   (ogg_int32_t)_mvxf,(ogg_int32_t)_mvyf,_log_xblk_sz,_log_yblk_sz); \
+   (od_int32)_mvxf,(od_int32)_mvyf,_log_xblk_sz,_log_yblk_sz); \
 } \
 
 #endif
@@ -1436,7 +1436,7 @@ typedef void (*od_mc_predict1fmv8_fixed_func)(unsigned char *_dst,
  const unsigned char *_src,int _systride,unsigned _mvxf,unsigned _mvyf);
 
 void od_mc_predict1fmv8_sse2(unsigned char *_dst,const unsigned char *_src,
- int _systride,ogg_int32_t _mvx,ogg_int32_t _mvy,
+ int _systride,od_int32 _mvx,od_int32 _mvy,
  int _log_xblk_sz,int _log_yblk_sz){
   static const od_mc_predict1fmv8_fixed_func
    VTBL[OD_LOG_MVBSIZE_MAX + 1][OD_LOG_MVBSIZE_MAX + 1]={

@@ -144,7 +144,7 @@ DECLARE_OD_LOG_MATRIX(char, char)
 DECLARE_OD_LOG_MATRIX(unsigned char, uchar)
 DECLARE_OD_LOG_MATRIX(ogg_int16_t, int16)
 DECLARE_OD_LOG_MATRIX(ogg_uint16_t, uint16)
-DECLARE_OD_LOG_MATRIX(ogg_int32_t, int32)
+DECLARE_OD_LOG_MATRIX(od_int32, int32)
 DECLARE_OD_LOG_MATRIX(ogg_uint32_t, uint32)
 DECLARE_OD_LOG_MATRIX(float, float)
 

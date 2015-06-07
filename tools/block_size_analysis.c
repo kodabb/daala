@@ -711,7 +711,7 @@ int oc_ilog32(unsigned _v){
 
 }
 
-void quant_scalar_gain(ogg_int32_t *_x,ogg_int16_t *_scale,int *y,int N,int Q){
+void quant_scalar_gain(od_int32 *_x,ogg_int16_t *_scale,int *y,int N,int Q){
   float gain0, gain1;
   float Q_1;
   int i;
@@ -768,7 +768,7 @@ static void process_plane(od_coeff *_img, od_coeff *_refi, int _w, int _h, int _
   for(y=0;y<_h;y+=16){
     for(x=0;x<_w;x+=16){
       od_coeff coeffs[256];
-      ogg_int32_t zi[256];
+      od_int32 zi[256];
 /*      int         out[256];*/
 /*      ogg_int16_t scale[256];*/
 
@@ -783,7 +783,7 @@ static void process_plane(od_coeff *_img, od_coeff *_refi, int _w, int _h, int _
       if (_pli==-1){
 #if 0
         int foo[256];
-        ogg_int32_t x[256];
+        od_int32 x[256];
         /*quant_scalar_gain(&zi[1],NULL,foo,255,200);*/
         extract(&zi[4], x, 2, 4, 16);
         quant_scalar_gain(x,NULL,foo,8,200);

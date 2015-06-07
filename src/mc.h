@@ -78,8 +78,8 @@ struct od_mv_grid_pt {
 };
 
 void od_mc_predict8(od_state *state, unsigned char *dst, int dystride,
- const unsigned char *src, int systride, const ogg_int32_t mvx[4],
- const ogg_int32_t mvy[4], int oc, int s, int log_xblk_sz, int log_yblk_sz);
+ const unsigned char *src, int systride, const od_int32 mvx[4],
+ const od_int32 mvy[4], int oc, int s, int log_xblk_sz, int log_yblk_sz);
 void od_state_mvs_clear(od_state *state);
 int od_state_get_predictor(od_state *state, int pred[2],
  int vx, int vy, int level, int mv_res);

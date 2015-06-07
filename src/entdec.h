@@ -43,7 +43,7 @@ struct od_ec_dec {
     This is constant throughout most of the decoding process, but becomes
      important once we hit the end of the buffer and stop incrementing pointers
      (and instead pretend cnt/nend_bits have lots of bits).*/
-  ogg_int32_t tell_offs;
+  od_int32 tell_offs;
   /*The end of the current input buffer.*/
   const unsigned char *end;
   /*The read pointer for the entropy-coded bits.*/

@@ -166,8 +166,8 @@ struct od_img {
   /** Number of planes (1 for greyscale, 3 for YCbCr, 4 for YCbCr+Alpha ) */
   int nplanes;
   /** Width and height in pixels */
-  ogg_int32_t width;
-  ogg_int32_t height;
+  od_int32 width;
+  od_int32 height;
 };
 
 /** Subsampling factors for a plane as a power of 2.
@@ -183,8 +183,8 @@ struct daala_info {
   unsigned char version_minor;
   unsigned char version_sub;
   /** pic_width,_height form a region of interest to encode */
-  ogg_int32_t pic_width;
-  ogg_int32_t pic_height;
+  od_int32 pic_width;
+  od_int32 pic_height;
   ogg_uint32_t pixel_aspect_numerator;
   ogg_uint32_t pixel_aspect_denominator;
   ogg_uint32_t timebase_numerator;

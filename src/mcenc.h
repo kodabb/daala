@@ -55,15 +55,15 @@ struct od_mv_node {
   /*The edge splitting index of that block.*/
   unsigned s:2;
   /*The current distortion of that block.*/
-  ogg_int32_t sad;
+  od_int32 sad;
   /*The SAD for BMA predictor centered on this node.
     Used for the dynamic thresholds of the initial EPZS^2 pass.*/
-  ogg_int32_t bma_sad;
+  od_int32 bma_sad;
   /*The location of this node in the grid.*/
   int vx;
   int vy;
   /*The change in global distortion for decimating this node.*/
-  ogg_int32_t dd;
+  od_int32 dd;
   /*The change in global rate for decimating this node.*/
   int dr;
   /*The position of this node in the heap.*/
@@ -90,11 +90,11 @@ struct od_mv_dp_state {
   /*The total rate change (thus far) produced by choosing this path.*/
   int dr;
   /*The total distortion change (thus far) produced by choosing this path.*/
-  ogg_int32_t dd;
+  od_int32 dd;
   /*The new SAD of each block affected by the the DP between this node and the
      previous node.
     These are installed if the path is selected.*/
-  ogg_int32_t block_sads[OD_DP_NBLOCKS_MAX];
+  od_int32 block_sads[OD_DP_NBLOCKS_MAX];
   /*The new rate of each MV predicted by this node.
     These are installed if the path is selected.
     These may supersede the rates reported in previous nodes on the path.*/
@@ -162,7 +162,7 @@ struct od_mv_est_ctx {
   /*The offsets to inflate the second threshold by for each block size.*/
   int thresh2_offs[OD_NMVBSIZES];
   /*The weights used to produce the accelerated MV predictor.*/
-  ogg_int32_t mvapw[2][2];
+  od_int32 mvapw[2][2];
   /*Flags indicating which MVs have already been tested during the initial
      EPZS^2 pass.*/
   unsigned char hit_cache[64][64];

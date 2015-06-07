@@ -88,12 +88,12 @@ struct od_pvq_adapt_ctx{
 
 void pvq_coder_bitstreams(int n, int type){
   od_pvq_adapt_ctx pvq_adapt;
-  ogg_int32_t adapt[OD_NSB_ADAPT_CTXS];
+  od_int32 adapt[OD_NSB_ADAPT_CTXS];
   int i;
   int k;
   od_ec_dec dec;
   unsigned char *buf;
-  ogg_int32_t buf_sz;
+  od_int32 buf_sz;
   k = 1;
   for (i = 0; i < n; i++) k += rand()%n;
   while (k > 1024) k >>= 1;
@@ -147,7 +147,7 @@ void pvq_coder_bitstreams(int n, int type){
 
 int run_pvq(od_coeff *X,int len,int N,int fuzz){
   od_pvq_adapt_ctx pvq_adapt;
-  ogg_int32_t adapt[OD_NSB_ADAPT_CTXS];
+  od_int32 adapt[OD_NSB_ADAPT_CTXS];
   int i, j;
   od_ec_enc enc;
   od_ec_dec dec;

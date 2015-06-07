@@ -89,7 +89,7 @@ extern const int *const OD_VERT_SETUP_DY[4][4];
 /*The shared (encoder and decoder) functions that have accelerated variants.*/
 struct od_state_opt_vtbl{
   void (*mc_predict1fmv8)(unsigned char *_dst, const unsigned char *_src,
-   int _systride, ogg_int32_t _mvx, ogg_int32_t _mvy,
+   int _systride, od_int32 _mvx, od_int32 _mvy,
    int _log_xblk_sz, int _log_yblk_sz);
   void (*mc_blend_full8)(unsigned char *_dst, int _dystride,
    const unsigned char *_src[4], int _log_xblk_sz, int _log_yblk_sz);
@@ -154,8 +154,8 @@ struct od_state{
   OD_ALIGN16(unsigned char mc_buf[5][OD_MVBSIZE_MAX*OD_MVBSIZE_MAX]);
   od_state_opt_vtbl   opt_vtbl;
   ogg_uint32_t        cpu_flags;
-  ogg_int32_t         frame_width;
-  ogg_int32_t         frame_height;
+  od_int32         frame_width;
+  od_int32         frame_height;
   /** Buffer for the 4 ref images. */
   int                 ref_imgi[4];
   /** Pointers to the ref images so one can move them around without coping
@@ -245,7 +245,7 @@ void od_state_fill_vis(od_state *_state);
 
 /*Default pure-C implementations.*/
 void od_mc_predict1fmv8_c(unsigned char *_dst, const unsigned char *_src,
- int _systride, ogg_int32_t _mvx, ogg_int32_t _mvy,
+ int _systride, od_int32 _mvx, od_int32 _mvy,
  int _log_xblk_sz, int _log_yblk_sz);
 void od_mc_blend_full8_c(unsigned char *_dst, int _dystride,
  const unsigned char *_src[4], int _log_xblk_sz, int _log_yblk_sz);

@@ -138,7 +138,7 @@ int laplace_decode(od_ec_dec *dec, int ex_q8, int k) {
 }
 
 static void laplace_decode_vector_delta(od_ec_dec *dec, od_coeff *y, int n, int k,
-                                        ogg_int32_t *curr, const ogg_int32_t *means) {
+                                        od_int32 *curr, const od_int32 *means) {
   int i;
   int prev;
   int sum_ex;
@@ -210,7 +210,7 @@ static void laplace_decode_vector_delta(od_ec_dec *dec, od_coeff *y, int n, int 
  * @param [in]     means Adaptation context input.
  */
 void laplace_decode_vector(od_ec_dec *dec, od_coeff *y, int n, int k,
-                           ogg_int32_t *curr, const ogg_int32_t *means) {
+                           od_int32 *curr, const od_int32 *means) {
   int i;
   int sum_ex;
   int kn;

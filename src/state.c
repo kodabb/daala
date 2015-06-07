@@ -800,8 +800,8 @@ void od_state_pred_block_from_setup(od_state *state,
  int vx, int vy, int oc, int s, int log_mvb_sz) {
   od_img_plane *iplane;
   od_mv_grid_pt *grid[4];
-  ogg_int32_t mvx[4];
-  ogg_int32_t mvy[4];
+  od_int32 mvx[4];
+  od_int32 mvy[4];
   const int *dxp;
   const int *dyp;
   int x;
@@ -813,8 +813,8 @@ void od_state_pred_block_from_setup(od_state *state,
   for (k = 0; k < 4; k++) {
     grid[k] = state->mv_grid[vy + (dyp[k] << log_mvb_sz)]
      + vx + (dxp[k] << log_mvb_sz);
-    mvx[k] = (ogg_int32_t)grid[k]->mv[0] << (14 - iplane->xdec);
-    mvy[k] = (ogg_int32_t)grid[k]->mv[1] << (14 - iplane->ydec);
+    mvx[k] = (od_int32)grid[k]->mv[0] << (14 - iplane->xdec);
+    mvy[k] = (od_int32)grid[k]->mv[1] << (14 - iplane->ydec);
   }
   x = vx << (OD_LOG_MVBSIZE_MIN + 1 - iplane->xdec);
   y = vy << (OD_LOG_MVBSIZE_MIN + 1 - iplane->ydec);
