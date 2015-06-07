@@ -3013,14 +3013,14 @@ static const od_mv_err_node *OD_ERRDOM[OD_MC_LEVEL_MAX] = {
   -dd1/dr1 is less, equal or greater than -dd2/dr2.*/
 static int od_mv_dddr_cmp(od_int32 dd1, int dr1,
  od_int32 dd2, int dr2) {
-  ogg_int64_t diff;
+  od_int64 diff;
   /*dr == 0 and dd != 0 should not be possible, but we check for it anyway just
      in case, to prevent a bug from trashing the whole optimization process.*/
   if (dr1 == 0) {
     return dr2 == 0 ? OD_SIGNI(dd2 - dd1) : (OD_SIGNI(dd1) << 1) - 1;
   }
   else if (dr2 == 0) return (OD_SIGNI(-dd2) << 1) + 1;
-  diff = dd2*(ogg_int64_t)dr1 - dd1*(ogg_int64_t)dr2;
+  diff = dd2*(od_int64)dr1 - dd1*(od_int64)dr2;
   return OD_SIGNI(diff);
 }
 

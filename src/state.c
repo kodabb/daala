@@ -1380,12 +1380,12 @@ void od_state_init_border(od_state *state) {
   }
 }
 
-ogg_int64_t daala_granule_basetime(void *encdec, ogg_int64_t granpos) {
+od_int64 daala_granule_basetime(void *encdec, od_int64 granpos) {
   od_state *state;
   state = (od_state *)encdec;
   if (granpos >= 0) {
-    ogg_int64_t key_time;
-    ogg_int64_t delta_time;
+    od_int64 key_time;
+    od_int64 delta_time;
     key_time = granpos >> state->info.keyframe_granule_shift;
     delta_time = granpos - (key_time << state->info.keyframe_granule_shift);
     return key_time + delta_time;
@@ -1393,9 +1393,9 @@ ogg_int64_t daala_granule_basetime(void *encdec, ogg_int64_t granpos) {
   return -1;
 }
 
-double daala_granule_time(void *encdec, ogg_int64_t granpos) {
+double daala_granule_time(void *encdec, od_int64 granpos) {
   od_state *state;
-  ogg_int64_t base_time;
+  od_int64 base_time;
   state = (od_state *)encdec;
   base_time = daala_granule_basetime(encdec, granpos);
   if (base_time >= 0) {

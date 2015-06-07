@@ -1664,7 +1664,7 @@ static void od_dump_frame_metrics(od_state *state) {
   frame_height = state->frame_height;
   for (pli = 0; pli < nplanes; pli++) {
     unsigned char *data;
-    ogg_int64_t enc_sqerr;
+    od_int64 enc_sqerr;
     od_uint32 npixels;
     int ystride;
     int xdec;

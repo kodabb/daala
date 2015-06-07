@@ -214,7 +214,7 @@ void od_acct_print(od_acct *acct, FILE *_fp) {
   while (od_acct_next_state(state, OD_ACCT_NCATS));
 }
 
-void od_acct_write(od_acct *acct, ogg_int64_t cur_time) {
+void od_acct_write(od_acct *acct, od_int64 cur_time) {
   int cat;
   unsigned int value;
   long fsize;

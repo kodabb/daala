@@ -90,7 +90,7 @@ void od_acct_set_category(od_acct *acct, od_acct_category cat,
 void od_acct_update(od_acct *acct, od_uint32 frac_bits,
  od_acct_category cat, unsigned int value);
 void od_acct_print(od_acct *acct, FILE *_fp);
-void od_acct_write(od_acct *acct, ogg_int64_t cur_time);
+void od_acct_write(od_acct *acct, od_int64 cur_time);
 
 typedef struct od_ec_acct_data od_ec_acct_data;
 

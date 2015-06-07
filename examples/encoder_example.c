@@ -442,7 +442,7 @@ int main(int argc, char **argv) {
   daala_enc_ctx *dd;
   daala_info di;
   daala_comment dc;
-  ogg_int64_t video_bytesout;
+  od_int64 video_bytesout;
   double time_base;
   int c;
   int loi;

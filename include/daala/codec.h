@@ -238,8 +238,8 @@ struct daala_comment {
 void daala_comment_init(daala_comment *dc);
 void daala_comment_clear(daala_comment *dc);
 
-ogg_int64_t daala_granule_basetime(void *encdec, ogg_int64_t granpos);
-double daala_granule_time(void *encdec, ogg_int64_t granpos);
+od_int64 daala_granule_basetime(void *encdec, od_int64 granpos);
+double daala_granule_time(void *encdec, od_int64 granpos);
 /**Determines whether a Daala packet is a header or not.
    This function does no verification beyond checking the packet type bit, so
     it should not be used for bitstream identification.

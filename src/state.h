@@ -166,7 +166,7 @@ struct od_state{
   unsigned char *ref_line_buf[8];
   unsigned char *ref_img_data;
   /** Increments by 1 for each frame. */
-  ogg_int64_t         cur_time;
+  od_int64         cur_time;
   od_mv_grid_pt **mv_grid;
 
   /** Number of horizontal motion-vector blocks. */
