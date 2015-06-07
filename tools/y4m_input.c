@@ -29,7 +29,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 #include "vidinput.h"
 #include <stdlib.h>
 #include <string.h>
-#include <ogg/os_types.h>
+#include <daala/daala_types.h>
 
 typedef struct y4m_input y4m_input;
 

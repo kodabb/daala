@@ -1,0 +1,153 @@
+/* (C) COPYRIGHT 1994-2002 Xiph.Org Foundation */
+/* Modified by Vittorio Giovara */
+/*
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions
+   are met:
+
+   - Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+   - Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+   ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+   A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+   OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+/* daala_types.h based on opus_types.h from libopus */
+
+/**
+   @file daala_types.h
+   @brief Daala reference implementation types
+*/
+#ifndef DAALA_TYPES_H
+#define DAALA_TYPES_H
+
+#include <stddef.h>
+
+/* Use the real stdint.h if it's there (taken from Paul Hsieh's pstdint.h) */
+#if (defined(__STDC__) && __STDC__ && __STDC_VERSION__ >= 199901L) || (defined(__GNUC__) && (defined(_STDINT_H) || defined(_STDINT_H_)) || defined (HAVE_STDINT_H))
+#include <stdint.h>
+
+   typedef int16_t ogg_int16_t;
+   typedef uint16_t ogg_uint16_t;
+   typedef int32_t ogg_int32_t;
+   typedef uint32_t ogg_uint32_t;
+#elif defined(_WIN32)
+
+#  if defined(__CYGWIN__)
+#    include <_G_config.h>
+     typedef _G_int32_t ogg_int32_t;
+     typedef _G_uint32_t ogg_uint32_t;
+     typedef _G_int16 ogg_int16_t;
+     typedef _G_uint16 ogg_uint16_t;
+#  elif defined(__MINGW32__)
+     typedef short ogg_int16_t;
+     typedef unsigned short ogg_uint16_t;
+     typedef int ogg_int32_t;
+     typedef unsigned int ogg_uint32_t;
+#  elif defined(__MWERKS__)
+     typedef int ogg_int32_t;
+     typedef unsigned int ogg_uint32_t;
+     typedef short ogg_int16_t;
+     typedef unsigned short ogg_uint16_t;
+#  else
+     /* MSVC/Borland */
+     typedef __int32 ogg_int32_t;
+     typedef unsigned __int32 ogg_uint32_t;
+     typedef __int16 ogg_int16_t;
+     typedef unsigned __int16 ogg_uint16_t;
+#  endif
+
+#elif defined(__MACOS__)
+
+#  include <sys/types.h>
+   typedef SInt16 ogg_int16_t;
+   typedef UInt16 ogg_uint16_t;
+   typedef SInt32 ogg_int32_t;
+   typedef UInt32 ogg_uint32_t;
+
+#elif (defined(__APPLE__) && defined(__MACH__)) /* MacOS X Framework build */
+
+#  include <sys/types.h>
+   typedef int16_t ogg_int16_t;
+   typedef u_int16_t ogg_uint16_t;
+   typedef int32_t ogg_int32_t;
+   typedef u_int32_t ogg_uint32_t;
+
+#elif defined(__BEOS__)
+
+   /* Be */
+#  include <inttypes.h>
+   typedef int16 ogg_int16_t;
+   typedef u_int16 ogg_uint16_t;
+   typedef int32_t ogg_int32_t;
+   typedef u_int32_t ogg_uint32_t;
+
+#elif defined (__EMX__)
+
+   /* OS/2 GCC */
+   typedef short ogg_int16_t;
+   typedef unsigned short ogg_uint16_t;
+   typedef int ogg_int32_t;
+   typedef unsigned int ogg_uint32_t;
+
+#elif defined (DJGPP)
+
+   /* DJGPP */
+   typedef short ogg_int16_t;
+   typedef unsigned short ogg_uint16_t;
+   typedef int ogg_int32_t;
+   typedef unsigned int ogg_uint32_t;
+
+#elif defined(R5900)
+
+   /* PS2 EE */
+   typedef int ogg_int32_t;
+   typedef unsigned ogg_uint32_t;
+   typedef short ogg_int16_t;
+   typedef unsigned short ogg_uint16_t;
+
+#elif defined(__SYMBIAN32__)
+
+   /* Symbian GCC */
+   typedef signed short ogg_int16_t;
+   typedef unsigned short ogg_uint16_t;
+   typedef signed int ogg_int32_t;
+   typedef unsigned int ogg_uint32_t;
+
+#elif defined(CONFIG_TI_C54X) || defined (CONFIG_TI_C55X)
+
+   typedef short ogg_int16_t;
+   typedef unsigned short ogg_uint16_t;
+   typedef long ogg_int32_t;
+   typedef unsigned long ogg_uint32_t;
+
+#elif defined(CONFIG_TI_C6X)
+
+   typedef short ogg_int16_t;
+   typedef unsigned short ogg_uint16_t;
+   typedef int ogg_int32_t;
+   typedef unsigned int ogg_uint32_t;
+
+#else
+
+   /* Give up, take a reasonable guess */
+   typedef short ogg_int16_t;
+   typedef unsigned short ogg_uint16_t;
+   typedef int ogg_int32_t;
+   typedef unsigned int ogg_uint32_t;
+
+#endif
+
+#endif  /* DAALA_TYPES_H */

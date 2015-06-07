@@ -49,6 +49,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 # define _daala_codec_H (1)
 /*Pick up typedefs.*/
 # include <ogg/ogg.h>
+# include <daala/daala_types.h>
 
 # if defined(__cplusplus)
 extern "C" {

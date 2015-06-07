@@ -48,7 +48,7 @@
 #include <math.h>
 #include <signal.h>
 #include "vidinput.h"
-#include <ogg/os_types.h>
+#include <daala/daala_types.h>
 
 const char *optstring = "fsy";
 struct option options [] = {

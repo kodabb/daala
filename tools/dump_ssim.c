@@ -11,7 +11,7 @@
 #include <io.h>
 #include <fcntl.h>
 #endif
-#include <ogg/os_types.h>
+#include <daala/daala_types.h>
 #include "getopt.h"
 
 const char *optstring = "frsy";

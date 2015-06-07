@@ -54,7 +54,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 #endif
 #include <png.h>
 #include <zlib.h>
-#include <ogg/os_types.h>
+#include <daala/daala_types.h>
 #include "vidinput.h"
 
 #define OD_MINI(_a,_b)      ((_a)<(_b)?(_a):(_b))
