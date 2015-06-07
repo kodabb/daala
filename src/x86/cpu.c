@@ -59,13 +59,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
           :"%edx" \
          )
 
-ogg_uint32_t od_cpu_flags_get(void){
-  ogg_uint32_t eax;
-  ogg_uint32_t ebx;
-  ogg_uint32_t ecx;
-  ogg_uint32_t edx;
-  ogg_uint32_t xcr0;
-  ogg_uint32_t flags;
+od_uint32 od_cpu_flags_get(void){
+  od_uint32 eax;
+  od_uint32 ebx;
+  od_uint32 ecx;
+  od_uint32 edx;
+  od_uint32 xcr0;
+  od_uint32 flags;
 #if !defined(__amd64__)&&!defined(__x86_64__)
   /*x86-32: Check to see if we have the cpuid instruction.
     This is done by attempting to flip the ID bit in the rFLAGS register.

@@ -43,7 +43,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
     month=Jun,
     year=2005
   }*/
-ogg_uint32_t OD_DIVU_SMALL_CONSTS[OD_DIVU_DMAX][2] = {
+od_uint32 OD_DIVU_SMALL_CONSTS[OD_DIVU_DMAX][2] = {
   { 0xFFFFFFFF, 0xFFFFFFFF },
   { 0xFFFFFFFF, 0xFFFFFFFF },
   { 0xAAAAAAAB,         0 },
@@ -118,7 +118,7 @@ void od_fatal_impl(const char *_str, const char *_file, int _line) {
 }
 #endif
 
-int od_ilog(ogg_uint32_t _v) {
+int od_ilog(od_uint32 _v) {
 #if defined(OD_CLZ)
   return (OD_CLZ0-OD_CLZ(_v))&-!!_v;
 #else
@@ -220,7 +220,7 @@ void oggbyte_write1(oggbyte_buffer *_b, unsigned _value) {
   *(_b->ptr++) = (unsigned char)_value;
 }
 
-void oggbyte_write4(oggbyte_buffer *_b, ogg_uint32_t _value) {
+void oggbyte_write4(oggbyte_buffer *_b, od_uint32 _value) {
   ptrdiff_t endbyte;
   endbyte = _b->ptr - _b->buf;
   if (endbyte+4 > _b->storage) {
@@ -275,7 +275,7 @@ int oggbyte_look1(oggbyte_buffer *_b) {
   else return _b->ptr[0];
 }
 
-int oggbyte_look4(oggbyte_buffer *_b, ogg_uint32_t *_val) {
+int oggbyte_look4(oggbyte_buffer *_b, od_uint32 *_val) {
   ptrdiff_t endbyte;
   endbyte = _b->ptr-_b->buf;
   if (endbyte > _b->storage-4) {
@@ -283,18 +283,18 @@ int oggbyte_look4(oggbyte_buffer *_b, ogg_uint32_t *_val) {
       *_val = _b->ptr[0];
       endbyte++;
       if (endbyte < _b->storage) {
-        *_val |= (ogg_uint32_t)_b->ptr[1]<<8;
+        *_val |= (od_uint32)_b->ptr[1]<<8;
         endbyte++;
-        if (endbyte < _b->storage) *_val |= (ogg_uint32_t)_b->ptr[2]<<16;
+        if (endbyte < _b->storage) *_val |= (od_uint32)_b->ptr[2]<<16;
       }
     }
     return -1;
   }
   else {
     *_val = _b->ptr[0];
-    *_val |= (ogg_uint32_t)_b->ptr[1]<<8;
-    *_val |= (ogg_uint32_t)_b->ptr[2]<<16;
-    *_val |= (ogg_uint32_t)_b->ptr[3]<<24;
+    *_val |= (od_uint32)_b->ptr[1]<<8;
+    *_val |= (od_uint32)_b->ptr[2]<<16;
+    *_val |= (od_uint32)_b->ptr[3]<<24;
   }
   return 0;
 }
@@ -314,29 +314,29 @@ int oggbyte_read1(oggbyte_buffer *_b) {
   else return *(_b->ptr++);
 }
 
-int oggbyte_read4(oggbyte_buffer *_b, ogg_uint32_t *_val) {
+int oggbyte_read4(oggbyte_buffer *_b, od_uint32 *_val) {
   unsigned char *end;
   end = _b->buf+_b->storage;
   if (_b->ptr+4 > end) {
     if (_b->ptr < end) {
       *_val = *(_b->ptr++);
       if (_b->ptr < end) {
-        *_val |= (ogg_uint32_t)*(_b->ptr++)<<8;
-        if (_b->ptr < end) *_val |= (ogg_uint32_t)*(_b->ptr++)<<16;
+        *_val |= (od_uint32)*(_b->ptr++)<<8;
+        if (_b->ptr < end) *_val |= (od_uint32)*(_b->ptr++)<<16;
       }
     }
     return -1;
   }
   else {
     *_val = (*_b->ptr++);
-    *_val |= (ogg_uint32_t)*(_b->ptr++)<<8;
-    *_val |= (ogg_uint32_t)*(_b->ptr++)<<16;
-    *_val |= (ogg_uint32_t)*(_b->ptr++)<<24;
+    *_val |= (od_uint32)*(_b->ptr++)<<8;
+    *_val |= (od_uint32)*(_b->ptr++)<<16;
+    *_val |= (od_uint32)*(_b->ptr++)<<24;
   }
   return 0;
 }
 
-int oggbyte_readcopy(oggbyte_buffer *_b, void *_dest, ogg_uint32_t _bytes) {
+int oggbyte_readcopy(oggbyte_buffer *_b, void *_dest, od_uint32 _bytes) {
   ptrdiff_t endbyte;
   endbyte = _b->ptr - _b->buf;
   OD_ASSERT(endbyte >= 0);
@@ -363,7 +363,7 @@ const char *daala_version_string(void) {
   return OD_VENDOR_STRING;
 }
 
-ogg_uint32_t daala_version_number(void) {
+od_uint32 daala_version_number(void) {
   return OD_VERSION_MAJOR<<16|OD_VERSION_MINOR<<8|OD_VERSION_SUB;
 }
 

@@ -137,7 +137,7 @@ static int od_ec_dec_normalize(od_ec_dec *dec,
   buf: The input buffer to use.
   Return: 0 on success, or a negative value on error.*/
 void od_ec_dec_init(od_ec_dec *dec,
- const unsigned char *buf, ogg_uint32_t storage) {
+ const unsigned char *buf, od_uint32 storage) {
   dec->buf = buf;
   dec->eptr = buf + storage;
   dec->end_window = 0;
@@ -402,11 +402,11 @@ int od_ec_decode_cdf_unscaled_dyadic(od_ec_dec *dec,
   ft: The number of integers that can be decoded (one more than the max).
       This must be at least 2, and no more than 2**29.
   Return: The decoded bits.*/
-ogg_uint32_t od_ec_dec_uint(od_ec_dec *dec, ogg_uint32_t ft) {
+od_uint32 od_ec_dec_uint(od_ec_dec *dec, od_uint32 ft) {
   OD_ASSERT(ft >= 2);
-  OD_ASSERT(ft <= (ogg_uint32_t)1 << (25 + OD_EC_UINT_BITS));
+  OD_ASSERT(ft <= (od_uint32)1 << (25 + OD_EC_UINT_BITS));
   if (ft > 1U << OD_EC_UINT_BITS) {
-    ogg_uint32_t t;
+    od_uint32 t;
     int ft1;
     int ftb;
     ft--;
@@ -426,10 +426,10 @@ ogg_uint32_t od_ec_dec_uint(od_ec_dec *dec, ogg_uint32_t ft) {
   ftb: The number of bits to extract.
        This must be between 0 and 25, inclusive.
   Return: The decoded bits.*/
-ogg_uint32_t od_ec_dec_bits(od_ec_dec *dec, unsigned ftb) {
+od_uint32 od_ec_dec_bits(od_ec_dec *dec, unsigned ftb) {
   od_ec_window window;
   int available;
-  ogg_uint32_t ret;
+  od_uint32 ret;
   OD_ASSERT(ftb <= 25);
   window = dec->end_window;
   available = dec->nend_bits;
@@ -451,7 +451,7 @@ ogg_uint32_t od_ec_dec_bits(od_ec_dec *dec, unsigned ftb) {
     while (available <= OD_EC_WINDOW_SIZE - 8);
     dec->eptr = eptr;
   }
-  ret = (ogg_uint32_t)window & (((ogg_uint32_t)1 << ftb) - 1);
+  ret = (od_uint32)window & (((od_uint32)1 << ftb) - 1);
   window >>= ftb;
   available -= ftb;
   dec->end_window = window;
@@ -476,6 +476,6 @@ int od_ec_dec_tell(od_ec_dec *dec) {
   Return: The number of bits scaled by 2**OD_BITRES.
           This will always be slightly larger than the exact value (e.g., all
            rounding error is in the positive direction).*/
-ogg_uint32_t od_ec_dec_tell_frac(od_ec_dec *dec) {
+od_uint32 od_ec_dec_tell_frac(od_ec_dec *dec) {
   return od_ec_tell_frac(od_ec_dec_tell(dec), dec->rng);
 }

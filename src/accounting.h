@@ -76,18 +76,18 @@ typedef struct od_acct od_acct;
 
 struct od_acct {
   FILE *fp;
-  ogg_uint32_t last_frac_bits;
+  od_uint32 last_frac_bits;
   unsigned int state[OD_ACCT_NCATS];
-  ogg_uint32_t frac_bits[OD_ACCT_SIZE];
+  od_uint32 frac_bits[OD_ACCT_SIZE];
 };
 
 void od_acct_init(od_acct *acct);
 void od_acct_clear(od_acct *acct);
 void od_acct_reset(od_acct *acct);
-void od_acct_update_frac_bits(od_acct *acct, ogg_uint32_t frac_bits);
+void od_acct_update_frac_bits(od_acct *acct, od_uint32 frac_bits);
 void od_acct_set_category(od_acct *acct, od_acct_category cat,
  unsigned int value);
-void od_acct_update(od_acct *acct, ogg_uint32_t frac_bits,
+void od_acct_update(od_acct *acct, od_uint32 frac_bits,
  od_acct_category cat, unsigned int value);
 void od_acct_print(od_acct *acct, FILE *_fp);
 void od_acct_write(od_acct *acct, ogg_int64_t cur_time);

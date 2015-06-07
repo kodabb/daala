@@ -1665,7 +1665,7 @@ static void od_dump_frame_metrics(od_state *state) {
   for (pli = 0; pli < nplanes; pli++) {
     unsigned char *data;
     ogg_int64_t enc_sqerr;
-    ogg_uint32_t npixels;
+    od_uint32 npixels;
     int ystride;
     int xdec;
     int ydec;
@@ -1970,7 +1970,7 @@ static void daala_encoder_check(daala_enc_ctx *ctx, od_img *img,
 #endif
 
 int daala_encode_packet_out(daala_enc_ctx *enc, int last, ogg_packet *op) {
-  ogg_uint32_t nbytes;
+  od_uint32 nbytes;
   if (enc == NULL || op == NULL) return OD_EFAULT;
   else if (enc->packet_state <= 0 || enc->packet_state == OD_PACKET_DONE) {
     return 0;

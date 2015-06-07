@@ -48,7 +48,7 @@ void daala_setup_free(daala_setup_info *setup) {
 
 static int daala_read_length_and_string(oggbyte_buffer *obb, int *lenp,
  char **strp) {
-  ogg_uint32_t len;
+  od_uint32 len;
   char *str;
   if (oggbyte_read4(obb, &len)) return OD_EBADHEADER;
   /*Check that it is in bounds for where it is going, i.e., an int.*/
@@ -68,7 +68,7 @@ static int daala_read_length_and_string(oggbyte_buffer *obb, int *lenp,
 }
 
 static int od_comment_unpack(daala_comment *dc, oggbyte_buffer *obb) {
-  ogg_uint32_t tmp;
+  od_uint32 tmp;
   long comments;
   int rv;
   int i;
@@ -134,7 +134,7 @@ int daala_decode_header_in(daala_info *info,
     case 0x80:
     {
       int pli;
-      ogg_uint32_t tmp;
+      od_uint32 tmp;
       int tmpi;
       /*This should be the first packet, and we should not have already read
          the info header packet yet.*/

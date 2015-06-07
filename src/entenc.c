@@ -76,8 +76,8 @@ static void od_ec_enc_normalize(od_ec_enc *enc,
      window it should be a fair win.*/
   if (s >= 0) {
     ogg_uint16_t *buf;
-    ogg_uint32_t storage;
-    ogg_uint32_t offs;
+    od_uint32 storage;
+    od_uint32 offs;
     unsigned m;
     buf = enc->precarry_buf;
     storage = enc->precarry_storage;
@@ -115,7 +115,7 @@ static void od_ec_enc_normalize(od_ec_enc *enc,
 
 /*Initializes the encoder.
   size: The initial size of the buffer, in bytes.*/
-void od_ec_enc_init(od_ec_enc *enc, ogg_uint32_t size) {
+void od_ec_enc_init(od_ec_enc *enc, od_uint32 size) {
   od_ec_enc_reset(enc);
   enc->buf = (unsigned char *)_ogg_malloc(sizeof(*enc->buf)*size);
   enc->storage = size;
@@ -376,10 +376,10 @@ void od_ec_encode_cdf_unscaled_dyadic(od_ec_enc *enc, int s,
   fl: The integer to encode.
   ft: The number of integers that can be encoded (one more than the max).
       This must be at least 2, and no more than 2**29.*/
-void od_ec_enc_uint(od_ec_enc *enc, ogg_uint32_t fl, ogg_uint32_t ft) {
+void od_ec_enc_uint(od_ec_enc *enc, od_uint32 fl, od_uint32 ft) {
   OD_ASSERT(ft >= 2);
   OD_ASSERT(fl < ft);
-  OD_ASSERT(ft <= (ogg_uint32_t)1 << (25 + OD_EC_UINT_BITS));
+  OD_ASSERT(ft <= (od_uint32)1 << (25 + OD_EC_UINT_BITS));
   if (ft > 1U << OD_EC_UINT_BITS) {
     int ft1;
     int ftb;
@@ -387,7 +387,7 @@ void od_ec_enc_uint(od_ec_enc *enc, ogg_uint32_t fl, ogg_uint32_t ft) {
     ftb = OD_ILOG_NZ(ft) - OD_EC_UINT_BITS;
     ft1 = (int)(ft >> ftb) + 1;
     od_ec_encode_cdf_q15(enc, (int)(fl >> ftb), OD_UNIFORM_CDF_Q15(ft1), ft1);
-    od_ec_enc_bits(enc, fl & (((ogg_uint32_t)1 << ftb) - 1), ftb);
+    od_ec_enc_bits(enc, fl & (((od_uint32)1 << ftb) - 1), ftb);
   }
   else od_ec_encode_cdf_q15(enc, (int)fl, OD_UNIFORM_CDF_Q15(ft), (int)ft);
 }
@@ -396,11 +396,11 @@ void od_ec_enc_uint(od_ec_enc *enc, ogg_uint32_t fl, ogg_uint32_t ft) {
   fl: The bits to encode.
   ftb: The number of bits to encode.
        This must be between 0 and 25, inclusive.*/
-void od_ec_enc_bits(od_ec_enc *enc, ogg_uint32_t fl, unsigned ftb) {
+void od_ec_enc_bits(od_ec_enc *enc, od_uint32 fl, unsigned ftb) {
   od_ec_window end_window;
   int nend_bits;
   OD_ASSERT(ftb <= 25);
-  OD_ASSERT(fl < (ogg_uint32_t)1 << ftb);
+  OD_ASSERT(fl < (od_uint32)1 << ftb);
 #if OD_MEASURE_EC_OVERHEAD
   enc->entropy += ftb;
 #endif
@@ -408,14 +408,14 @@ void od_ec_enc_bits(od_ec_enc *enc, ogg_uint32_t fl, unsigned ftb) {
   nend_bits = enc->nend_bits;
   if (nend_bits + ftb > OD_EC_WINDOW_SIZE) {
     unsigned char *buf;
-    ogg_uint32_t storage;
-    ogg_uint32_t end_offs;
+    od_uint32 storage;
+    od_uint32 end_offs;
     buf = enc->buf;
     storage = enc->storage;
     end_offs = enc->end_offs;
     if (end_offs + (OD_EC_WINDOW_SIZE >> 3) >= storage) {
       unsigned char *new_buf;
-      ogg_uint32_t new_storage;
+      od_uint32 new_storage;
       new_storage = 2*storage + (OD_EC_WINDOW_SIZE >> 3);
       new_buf = (unsigned char *)_ogg_malloc(sizeof(*new_buf)*new_storage);
       if (new_buf == NULL) {
@@ -488,12 +488,12 @@ void od_ec_enc_patch_initial_bits(od_ec_enc *enc, unsigned val, int nbits) {
   bytes: Returns the size of the encoded data in the returned buffer.
   Return: A pointer to the start of the final buffer, or NULL if there was an
            encoding error.*/
-unsigned char *od_ec_enc_done(od_ec_enc *enc, ogg_uint32_t *nbytes) {
+unsigned char *od_ec_enc_done(od_ec_enc *enc, od_uint32 *nbytes) {
   unsigned char *out;
-  ogg_uint32_t storage;
+  od_uint32 storage;
   ogg_uint16_t *buf;
-  ogg_uint32_t offs;
-  ogg_uint32_t end_offs;
+  od_uint32 offs;
+  od_uint32 end_offs;
   int nend_bits;
   od_ec_window m;
   od_ec_window e;
@@ -504,7 +504,7 @@ unsigned char *od_ec_enc_done(od_ec_enc *enc, ogg_uint32_t *nbytes) {
   if (enc->error) return NULL;
 #if OD_MEASURE_EC_OVERHEAD
   {
-    ogg_uint32_t tell;
+    od_uint32 tell;
     /* Don't count the 1 bit we lose to raw bits as overhead. */
     tell = od_ec_enc_tell_frac(enc)/8.-1;
     fprintf(stderr, "overhead: %f%%\n", 100*(tell-enc->entropy)/enc->entropy);
@@ -627,7 +627,7 @@ int od_ec_enc_tell(od_ec_enc *enc) {
   Return: The number of bits scaled by 2**OD_BITRES.
           This will always be slightly larger than the exact value (e.g., all
            rounding error is in the positive direction).*/
-ogg_uint32_t od_ec_enc_tell_frac(od_ec_enc *enc) {
+od_uint32 od_ec_enc_tell_frac(od_ec_enc *enc) {
   return od_ec_tell_frac(od_ec_enc_tell(enc), enc->rng);
 }
 
@@ -647,9 +647,9 @@ void od_ec_enc_checkpoint(od_ec_enc *dst, const od_ec_enc *src) {
    changes will remain in the restored version.*/
 void od_ec_enc_rollback(od_ec_enc *dst, const od_ec_enc *src) {
   unsigned char *buf;
-  ogg_uint32_t storage;
+  od_uint32 storage;
   ogg_uint16_t *precarry_buf;
-  ogg_uint32_t precarry_storage;
+  od_uint32 precarry_storage;
   OD_ASSERT(dst->storage >= src->storage);
   OD_ASSERT(dst->precarry_storage >= src->precarry_storage);
   buf = dst->buf;

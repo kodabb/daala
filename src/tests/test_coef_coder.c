@@ -152,7 +152,7 @@ int run_pvq(od_coeff *X,int len,int N,int fuzz){
   od_ec_enc enc;
   od_ec_dec dec;
   unsigned char *buf;
-  ogg_uint32_t   buf_sz;
+  od_uint32   buf_sz;
   int *Ki;
   generic_encoder model;
   int EK=65536;

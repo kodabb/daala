@@ -153,7 +153,7 @@ struct od_state{
   daala_info          info;
   OD_ALIGN16(unsigned char mc_buf[5][OD_MVBSIZE_MAX*OD_MVBSIZE_MAX]);
   od_state_opt_vtbl   opt_vtbl;
-  ogg_uint32_t        cpu_flags;
+  od_uint32        cpu_flags;
   od_int32         frame_width;
   od_int32         frame_height;
   /** Buffer for the 4 ref images. */

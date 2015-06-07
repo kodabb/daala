@@ -535,8 +535,8 @@ static void od_mc_predict1fmv8_##_n##x##_m(unsigned char *_dst, \
     if(_mvyf!=0){ \
       for(j=0;j<(_m);j++){ \
         for(i=0;i<(_n);i++){ \
-          ogg_uint32_t a; \
-          ogg_uint32_t b; \
+          od_uint32 a; \
+          od_uint32 b; \
           a=_src[i<<1]+((_src[i<<1|1]-_src[i<<1])*_mvxf>>16); \
           b=(_src+_systride)[i<<1]+ \
            (((_src+_systride)[i<<1|1]-(_src+_systride)[i<<1])*_mvxf>>16); \

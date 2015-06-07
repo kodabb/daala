@@ -185,11 +185,11 @@ struct daala_info {
   /** pic_width,_height form a region of interest to encode */
   od_int32 pic_width;
   od_int32 pic_height;
-  ogg_uint32_t pixel_aspect_numerator;
-  ogg_uint32_t pixel_aspect_denominator;
-  ogg_uint32_t timebase_numerator;
-  ogg_uint32_t timebase_denominator;
-  ogg_uint32_t frame_duration;
+  od_uint32 pixel_aspect_numerator;
+  od_uint32 pixel_aspect_denominator;
+  od_uint32 timebase_numerator;
+  od_uint32 timebase_denominator;
+  od_uint32 frame_duration;
   int keyframe_granule_shift;
   int nplanes;
   daala_plane_info plane_info[OD_NPLANES_MAX];

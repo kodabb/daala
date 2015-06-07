@@ -30,7 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 
 /*OPT: od_ec_window must be at least 32 bits, but if you have fast arithmetic
    on a larger type, you can speed up the decoder by using it here.*/
-typedef ogg_uint32_t od_ec_window;
+typedef od_uint32 od_ec_window;
 
 # define OD_EC_WINDOW_SIZE ((int)sizeof(od_ec_window)*CHAR_BIT)
 
@@ -51,7 +51,7 @@ extern const ogg_uint16_t OD_UNIFORM_CDFS_Q15[135];
 
 /*See entcode.c for further documentation.*/
 
-OD_WARN_UNUSED_RESULT ogg_uint32_t od_ec_tell_frac(ogg_uint32_t nbits_total,
- ogg_uint32_t rng);
+OD_WARN_UNUSED_RESULT od_uint32 od_ec_tell_frac(od_uint32 nbits_total,
+ od_uint32 rng);
 
 #endif

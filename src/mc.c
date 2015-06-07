@@ -45,8 +45,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 void od_mc_predict1fmv8_c(unsigned char *dst, const unsigned char *src,
  int systride, od_int32 mvx, od_int32 mvy,
  int log_xblk_sz, int log_yblk_sz) {
-  ogg_uint32_t mvxf;
-  ogg_uint32_t mvyf;
+  od_uint32 mvxf;
+  od_uint32 mvyf;
   int xblk_sz;
   int yblk_sz;
   int p00;
@@ -57,14 +57,14 @@ void od_mc_predict1fmv8_c(unsigned char *dst, const unsigned char *src,
   xblk_sz = 1 << log_xblk_sz;
   yblk_sz = 1 << log_yblk_sz;
   src += (mvx >> 16) + (mvy >> 16)*systride;
-  mvxf = (ogg_uint32_t)(mvx & 0xFFFF);
-  mvyf = (ogg_uint32_t)(mvy & 0xFFFF);
+  mvxf = (od_uint32)(mvx & 0xFFFF);
+  mvyf = (od_uint32)(mvy & 0xFFFF);
   if (mvxf != 0) {
     if (mvyf != 0) {
       for (j = 0; j < yblk_sz; j++) {
         for (i = 0; i < xblk_sz; i++) {
-          ogg_uint32_t a;
-          ogg_uint32_t b;
+          od_uint32 a;
+          od_uint32 b;
           int p11;
           /*printf("<%16.12f, %16.12f>%s", mvx/(double)0x40000,
            mvy/(double)0x40000, i + 1 < xblk_sz ? "::" : "\n");*/
@@ -72,8 +72,8 @@ void od_mc_predict1fmv8_c(unsigned char *dst, const unsigned char *src,
           p01 = src[i<<1 | 1];
           p10 = (src + systride)[i<<1];
           p11 = (src + systride)[i<<1 | 1];
-          a = (((ogg_uint32_t)p00 << 16) + (p01 - p00)*mvxf) >> 16;
-          b = (((ogg_uint32_t)p10 << 16) + (p11 - p10)*mvxf) >> 16;
+          a = (((od_uint32)p00 << 16) + (p01 - p00)*mvxf) >> 16;
+          b = (((od_uint32)p10 << 16) + (p11 - p10)*mvxf) >> 16;
           dst[j*xblk_sz + i] = (unsigned char)(((a<<16) + (b - a)*mvyf) >> 16);
         }
         src += systride << 1;
@@ -87,7 +87,7 @@ void od_mc_predict1fmv8_c(unsigned char *dst, const unsigned char *src,
           p00 = src[i<<1];
           p01 = src[i<<1 | 1];
           dst[j*xblk_sz + i] = (unsigned char)(
-           (((ogg_uint32_t)p00 << 16) + (p01 - p00)*mvxf) >> 16);
+           (((od_uint32)p00 << 16) + (p01 - p00)*mvxf) >> 16);
         }
         src += systride << 1;
       }
@@ -102,7 +102,7 @@ void od_mc_predict1fmv8_c(unsigned char *dst, const unsigned char *src,
           p00 = src[i<<1];
           p10 = (src + systride)[i<<1];
           dst[j*xblk_sz + i] = (unsigned char)(
-           (((ogg_uint32_t)p00 << 16) + (p10 - p00)*mvyf) >> 16);
+           (((od_uint32)p00 << 16) + (p10 - p00)*mvyf) >> 16);
         }
         src += systride << 1;
       }

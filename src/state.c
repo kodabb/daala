@@ -473,7 +473,7 @@ void od_adapt_ctx_reset(od_adapt_ctx *state, int is_keyframe) {
   for (level = 0; level < OD_MC_LEVEL_MAX; level++) {
     for (i = 0; i < 9; i++) {
       state->split_flag_cdf[level][i][0] = (ogg_uint16_t)(
-       (ogg_uint32_t)OD_MV_SPLIT_FLAG_PROBZ_Q15[level][i]*
+       (od_uint32)OD_MV_SPLIT_FLAG_PROBZ_Q15[level][i]*
        (state->split_flag_increment >> 1) >> 15);
       state->split_flag_cdf[level][i][1] = state->split_flag_increment >> 1;
     }

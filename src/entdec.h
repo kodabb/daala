@@ -62,7 +62,7 @@ struct od_ec_dec {
 /*See entdec.c for further documentation.*/
 
 void od_ec_dec_init(od_ec_dec *dec,
- const unsigned char *buf, ogg_uint32_t storage)
+ const unsigned char *buf, od_uint32 storage)
  OD_ARG_NONNULL(1) OD_ARG_NONNULL(2);
 
 OD_WARN_UNUSED_RESULT int od_ec_decode_bool(od_ec_dec *dec, unsigned fz,
@@ -79,13 +79,13 @@ OD_WARN_UNUSED_RESULT int od_ec_decode_cdf_unscaled_dyadic(od_ec_dec *dec,
  const ogg_uint16_t *cdf, int nsyms, unsigned _ftb)
  OD_ARG_NONNULL(1) OD_ARG_NONNULL(2);
 
-OD_WARN_UNUSED_RESULT ogg_uint32_t od_ec_dec_uint(od_ec_dec *dec,
- ogg_uint32_t ft) OD_ARG_NONNULL(1);
+OD_WARN_UNUSED_RESULT od_uint32 od_ec_dec_uint(od_ec_dec *dec,
+ od_uint32 ft) OD_ARG_NONNULL(1);
 
-OD_WARN_UNUSED_RESULT ogg_uint32_t od_ec_dec_bits(od_ec_dec *dec,
+OD_WARN_UNUSED_RESULT od_uint32 od_ec_dec_bits(od_ec_dec *dec,
  unsigned ftb) OD_ARG_NONNULL(1);
 
 OD_WARN_UNUSED_RESULT int od_ec_dec_tell(od_ec_dec *dec) OD_ARG_NONNULL(1);
-ogg_uint32_t od_ec_dec_tell_frac(od_ec_dec *dec) OD_ARG_NONNULL(1);
+od_uint32 od_ec_dec_tell_frac(od_ec_dec *dec) OD_ARG_NONNULL(1);
 
 #endif

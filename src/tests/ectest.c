@@ -31,7 +31,7 @@ int main(int _argc,char **_argv){
   unsigned int   sym;
   unsigned int   seed;
   unsigned char *ptr;
-  ogg_uint32_t   ptr_sz;
+  od_uint32   ptr_sz;
   const char    *env_seed;
   ret=EXIT_SUCCESS;
   entropy=0;

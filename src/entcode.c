@@ -62,8 +62,8 @@ const ogg_uint16_t OD_UNIFORM_CDFS_Q15[135] = {
   Return: The number of bits scaled by 2**OD_BITRES.
           This will always be slightly larger than the exact value (e.g., all
            rounding error is in the positive direction).*/
-ogg_uint32_t od_ec_tell_frac(ogg_uint32_t nbits_total, ogg_uint32_t rng) {
-  ogg_uint32_t nbits;
+od_uint32 od_ec_tell_frac(od_uint32 nbits_total, od_uint32 rng) {
+  od_uint32 nbits;
   int l;
   int i;
   /*To handle the non-integral number of bits still left in the encoder/decoder

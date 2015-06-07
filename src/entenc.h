@@ -37,9 +37,9 @@ struct od_ec_enc {
      where all the arithmetic-coded data gets prepended to it.*/
   unsigned char *buf;
   /*The size of the buffer.*/
-  ogg_uint32_t storage;
+  od_uint32 storage;
   /*The offset at which the last byte containing raw bits was written.*/
-  ogg_uint32_t end_offs;
+  od_uint32 end_offs;
   /*Bits that will be read from/written at the end.*/
   od_ec_window end_window;
   /*Number of valid bits in end_window.*/
@@ -47,9 +47,9 @@ struct od_ec_enc {
   /*A buffer for output bytes with their associated carry flags.*/
   ogg_uint16_t *precarry_buf;
   /*The size of the pre-carry buffer.*/
-  ogg_uint32_t precarry_storage;
+  od_uint32 precarry_storage;
   /*The offset at which the next entropy-coded byte will be written.*/
-  ogg_uint32_t offs;
+  od_uint32 offs;
   /*The low end of the current range.*/
   od_ec_window low;
   /*The number of values in the current range.*/
@@ -66,7 +66,7 @@ struct od_ec_enc {
 
 /*See entenc.c for further documentation.*/
 
-void od_ec_enc_init(od_ec_enc *enc, ogg_uint32_t size) OD_ARG_NONNULL(1);
+void od_ec_enc_init(od_ec_enc *enc, od_uint32 size) OD_ARG_NONNULL(1);
 void od_ec_enc_reset(od_ec_enc *enc) OD_ARG_NONNULL(1);
 void od_ec_enc_clear(od_ec_enc *enc) OD_ARG_NONNULL(1);
 
@@ -84,19 +84,19 @@ void od_ec_encode_cdf_unscaled_dyadic(od_ec_enc *enc, int s,
  const ogg_uint16_t *cdf, int nsyms, unsigned ftb)
  OD_ARG_NONNULL(1) OD_ARG_NONNULL(3);
 
-void od_ec_enc_uint(od_ec_enc *enc, ogg_uint32_t fl, ogg_uint32_t ft)
+void od_ec_enc_uint(od_ec_enc *enc, od_uint32 fl, od_uint32 ft)
 OD_ARG_NONNULL(1);
 
-void od_ec_enc_bits(od_ec_enc *enc, ogg_uint32_t fl, unsigned ftb)
+void od_ec_enc_bits(od_ec_enc *enc, od_uint32 fl, unsigned ftb)
  OD_ARG_NONNULL(1);
 
 void od_ec_enc_patch_initial_bits(od_ec_enc *enc, unsigned val, int nbits)
  OD_ARG_NONNULL(1);
 OD_WARN_UNUSED_RESULT unsigned char *od_ec_enc_done(od_ec_enc *enc,
- ogg_uint32_t *nbytes) OD_ARG_NONNULL(1) OD_ARG_NONNULL(2);
+ od_uint32 *nbytes) OD_ARG_NONNULL(1) OD_ARG_NONNULL(2);
 
 OD_WARN_UNUSED_RESULT int od_ec_enc_tell(od_ec_enc *enc) OD_ARG_NONNULL(1);
-OD_WARN_UNUSED_RESULT ogg_uint32_t od_ec_enc_tell_frac(od_ec_enc *enc)
+OD_WARN_UNUSED_RESULT od_uint32 od_ec_enc_tell_frac(od_ec_enc *enc)
  OD_ARG_NONNULL(1);
 
 void od_ec_enc_checkpoint(od_ec_enc *dst, const od_ec_enc *src);

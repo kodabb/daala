@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
     int max;
     int d;
     max = atoi(argv[1]);
-    printf("ogg_uint32_t OD_DIVU_SMALL_CONSTS[OD_DIVU_DMAX][2]={\n");
+    printf("od_uint32 OD_DIVU_SMALL_CONSTS[OD_DIVU_DMAX][2]={\n");
     for (d = 1; d <= max; d++) {
       if ((d & (d - 1)) == 0) {
         printf("  {0xFFFFFFFF,0xFFFFFFFF},\n");

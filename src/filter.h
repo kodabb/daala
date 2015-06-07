@@ -36,7 +36,7 @@ typedef od_int32 od_coeff;
   This will not work for _b == 0, however currently this is only used for
    b == 1 anyway.*/
 # define OD_UNBIASED_RSHIFT32(_a, _b) \
- (((od_int32)(((ogg_uint32_t)(_a) >> (32 - (_b))) + (_a))) >> (_b))
+ (((od_int32)(((od_uint32)(_a) >> (32 - (_b))) + (_a))) >> (_b))
 
 # define OD_DCT_RSHIFT(_a, _b) OD_UNBIASED_RSHIFT32(_a, _b)
 
