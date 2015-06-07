@@ -150,7 +150,7 @@
 
 #endif
 
-typedef unsigned long long int ogg_uint64_t;
+typedef unsigned long long int od_uint64;
 typedef long long int od_int64;
 
 #endif  /* DAALA_TYPES_H */
