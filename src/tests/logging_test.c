@@ -122,7 +122,7 @@ const char *expected_matrix_uint32 =
 
 int main(int argc, char **argv) {
   int i;
-  ogg_int16_t int16_buffer[BUFFER_WIDTH * BUFFER_HEIGHT];
+  od_int16 int16_buffer[BUFFER_WIDTH * BUFFER_HEIGHT];
   float float_buffer[BUFFER_WIDTH * BUFFER_HEIGHT];
   od_uint32 uint32_buffer[BUFFER_WIDTH * BUFFER_HEIGHT];
   (void)argc;

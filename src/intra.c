@@ -61,7 +61,7 @@ void od_hv_intra_pred(od_coeff *pred, od_coeff *d, int w, int bx, int by,
 }
 
 /* Trained using a linear regression on subset3. See dump_cfl_scaling4.*/
-static ogg_int16_t od_cfl_scaling4[4][4] = {
+static od_int16 od_cfl_scaling4[4][4] = {
   { 128, 128, 100, 36},
   { 128, 80, 71, 35},
   { 100, 71, 35, 31},

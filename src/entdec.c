@@ -91,7 +91,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
 static void od_ec_dec_refill(od_ec_dec *dec) {
   int s;
   od_ec_window dif;
-  ogg_int16_t cnt;
+  od_int16 cnt;
   const unsigned char *bptr;
   const unsigned char *end;
   dif = dec->dif;

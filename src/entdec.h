@@ -54,7 +54,7 @@ struct od_ec_dec {
   /*The number of values in the current range.*/
   ogg_uint16_t rng;
   /*The number of bits of data in the current value.*/
-  ogg_int16_t cnt;
+  od_int16 cnt;
   /*Nonzero if an error occurred.*/
   int error;
 };
